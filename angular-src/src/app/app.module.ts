@@ -17,6 +17,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
+import { NbEmailPassAuthProvider, NbAuthModule } from '@nebular/auth';
+
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -28,6 +31,32 @@ import { environment } from '../environments/environment';
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
+    NbAuthModule.forRoot({
+      providers: {
+        email: {
+          service: NbEmailPassAuthProvider,
+          config: {
+            baseEndpoint: 'http://localhost:3000',
+            login: {
+              endpoint: '/users/authenticate',
+            },
+            register: {
+              endpoint: '/users/register',
+            },
+            logout: {
+               endpoint: '/auth/sign-out',
+             },
+             requestPass: {
+               endpoint: '/auth/request-pass',
+             },
+             resetPass: {
+               endpoint: '/auth/reset-pass',
+             },
+          },
+        },
+      },
+      forms: {},
+    }), 
   ],
   bootstrap: [AppComponent],
   providers: [
