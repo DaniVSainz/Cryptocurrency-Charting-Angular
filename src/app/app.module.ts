@@ -24,7 +24,6 @@ import { environment } from '../environments/environment';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
 
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
