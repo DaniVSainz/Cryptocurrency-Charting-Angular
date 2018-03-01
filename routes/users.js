@@ -62,7 +62,7 @@ router.post('/register', async (req,res,next) => {
 
 
 // Authenticate
-router.post('/authenticate', (req, res, next) => {
+router.post('/authenticatev2', (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
 
@@ -95,6 +95,42 @@ router.post('/authenticate', (req, res, next) => {
         return res.status(400).json({success: false,isVerified:true, msg: 'Incorrect username or password'});
       }
     });
+  });
+});
+
+// Authenticate
+router.post('/authenticate', async(req, res, next) => {
+  console.log(req);
+  const email = req.body.email;
+  const password = req.body.password;
+
+  let user = await User.findOne({email: email});
+  if(!user) {
+    return res.status(400).send({success: false, msg: 'Incorrect username or password'});
+  }
+  if(user.isVerified == false){
+    return res.status(400).send({success: false, isVerified:false, msg: `Email is not verified, please verify to log in.`})
+  }
+  User.comparePassword(password, user.password, (err, isMatch) => {
+    if(err) throw err;
+    if(isMatch) {
+      const token = jwt.sign({data: user}, config.secret, {
+        expiresIn: 604800 // 1 week
+      });
+      res.status(200).send({
+        msg:`You're now logged in`,
+        success: true,
+        token: token,
+        user: {
+          id: user._id,
+          name: user.name,
+          username: user.username,
+          email: user.email
+        }
+      });
+    } else {
+      return res.status(400).json({success: false,isVerified:true, msg: 'Incorrect username or password'});
+    }
   });
 });
 

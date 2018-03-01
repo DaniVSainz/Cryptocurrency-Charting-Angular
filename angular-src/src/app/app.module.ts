@@ -59,6 +59,9 @@ import { NB_AUTH_TOKEN_CLASS, NbAuthJWTToken } from '@nebular/auth';
                endpoint: '/auth/reset-pass',
                method: 'post',
              },
+             token: {
+              key: 'token', // this parameter tells Nebular where to look for the token
+            },
           },
         },
       },
