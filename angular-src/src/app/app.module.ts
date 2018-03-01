@@ -19,7 +19,7 @@ import { environment } from '../environments/environment';
 
 //Nebular Auth
 import { NbEmailPassAuthProvider, NbAuthModule } from '@nebular/auth';
-import { NB_AUTH_TOKEN_WRAPPER_TOKEN, NbAuthJWTToken } from '@nebular/auth';
+import { NB_AUTH_TOKEN_CLASS, NbAuthJWTToken } from '@nebular/auth';
 
 
 @NgModule({
@@ -41,18 +41,23 @@ import { NB_AUTH_TOKEN_WRAPPER_TOKEN, NbAuthJWTToken } from '@nebular/auth';
             baseEndpoint: 'http://localhost:3000',
             login: {
               endpoint: '/users/authenticate',
+              method: 'post',
             },
             register: {
               endpoint: '/users/register',
+              method: 'post',
             },
             logout: {
                endpoint: '/auth/sign-out',
+               method: 'post',
              },
              requestPass: {
                endpoint: '/auth/request-pass',
+               method: 'post',
              },
              resetPass: {
                endpoint: '/auth/reset-pass',
+               method: 'post',
              },
           },
         },
@@ -63,7 +68,7 @@ import { NB_AUTH_TOKEN_WRAPPER_TOKEN, NbAuthJWTToken } from '@nebular/auth';
   bootstrap: [AppComponent],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
-  ],
+    { provide: NB_AUTH_TOKEN_CLASS, useValue: NbAuthJWTToken },  ],
 })
 export class AppModule {
 }
