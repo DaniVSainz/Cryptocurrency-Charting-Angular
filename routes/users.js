@@ -11,6 +11,7 @@ var nodemailer = require('nodemailer');
 
 
 router.post('/register', async (req,res,next) => {
+  console.log(req.body);
   try {
     let newUser = new User ({
       name: req.body.name,

@@ -17,7 +17,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
+//Nebular Auth
 import { NbEmailPassAuthProvider, NbAuthModule } from '@nebular/auth';
+import { NB_AUTH_TOKEN_WRAPPER_TOKEN, NbAuthJWTToken } from '@nebular/auth';
 
 
 @NgModule({
