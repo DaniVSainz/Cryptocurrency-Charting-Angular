@@ -137,6 +137,7 @@ export class NgxLoginComponent  {
 
       if (result.isSuccess()) {
         this.messages = result.getMessages();
+        
       } else {
         this.errors = result.getErrors();
         console.log(this.errors);

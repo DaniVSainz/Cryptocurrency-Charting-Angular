@@ -100,7 +100,7 @@ router.post('/authenticatev2', (req, res, next) => {
 
 // Authenticate
 router.post('/authenticate', async(req, res, next) => {
-  console.log(req);
+
   const email = req.body.email;
   const password = req.body.password;
 
@@ -117,6 +117,7 @@ router.post('/authenticate', async(req, res, next) => {
       const token = jwt.sign({data: user}, config.secret, {
         expiresIn: 604800 // 1 week
       });
+
       res.status(200).send({
         msg:`You're now logged in`,
         success: true,
