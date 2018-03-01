@@ -5,41 +5,42 @@
  */
 import { Routes } from '@angular/router';
 
-import { NbAuthComponent } from './components/auth.component';
-import { NbLoginComponent } from './components/login/login.component';
-import { NbRegisterComponent } from './components/register/register.component';
-import { NbLogoutComponent } from './components/logout/logout.component';
-import { NbRequestPasswordComponent } from './components/request-password/request-password.component';
-import { NbResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { NgxAuthComponent } from './components/auth.component';
+import { NgxAuthBlockComponent } from './components/auth-block/auth-block.component';
+import { NgxLoginComponent } from './components/login/login.component';
+import { NgxRegisterComponent } from './components/register/register.component';
+import { NgxLogoutComponent } from './components/logout/logout.component';
+import { NgxRequestPasswordComponent } from './components/request-password/request-password.component';
+import { NgxResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 export const routes: Routes = [
   {
     path: 'auth',
-    component: NbAuthComponent,
+    component: NgxAuthComponent,
     children: [
       {
         path: '',
-        component: NbLoginComponent,
+        component: NgxLoginComponent,
       },
       {
         path: 'login',
-        component: NbLoginComponent,
+        component: NgxLoginComponent,
       },
       {
         path: 'register',
-        component: NbRegisterComponent,
+        component: NgxRegisterComponent,
       },
       {
         path: 'logout',
-        component: NbLogoutComponent,
+        component: NgxLogoutComponent,
       },
       {
         path: 'request-password',
-        component: NbRequestPasswordComponent,
+        component: NgxRequestPasswordComponent,
       },
       {
         path: 'reset-password',
-        component: NbResetPasswordComponent,
+        component: NgxResetPasswordComponent,
       },
     ],
   },

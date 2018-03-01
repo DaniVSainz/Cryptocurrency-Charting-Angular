@@ -20,14 +20,14 @@ import {
   NbAuthOptions, NB_AUTH_INTERCEPTOR_HEADER, NB_AUTH_TOKEN_CLASS,
 } from './auth.options';
 
-import { NbAuthComponent } from './components/auth.component';
+import { NgxAuthComponent } from './components/auth.component';
+import { NgxAuthBlockComponent } from './components/auth-block/auth-block.component';
+import { NgxLoginComponent } from './components/login/login.component';
+import { NgxRegisterComponent } from './components/register/register.component';
+import { NgxLogoutComponent } from './components/logout/logout.component';
+import { NgxRequestPasswordComponent } from './components/request-password/request-password.component';
+import { NgxResetPasswordComponent } from './components/reset-password/reset-password.component';
 
-import { NbAuthBlockComponent } from './components/auth-block/auth-block.component';
-import { NbLoginComponent } from './components/login/login.component';
-import { NbRegisterComponent } from './components/register/register.component';
-import { NbLogoutComponent } from './components/logout/logout.component';
-import { NbRequestPasswordComponent } from './components/request-password/request-password.component';
-import { NbResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 import { routes } from './auth.routes';
 import { deepExtend } from './helpers';
@@ -61,22 +61,22 @@ export function nbOptionsFactory(options) {
     HttpClientModule,
   ],
   declarations: [
-    NbAuthComponent,
-    NbAuthBlockComponent,
-    NbLoginComponent,
-    NbRegisterComponent,
-    NbRequestPasswordComponent,
-    NbResetPasswordComponent,
-    NbLogoutComponent,
+    NgxAuthComponent,
+    NgxAuthBlockComponent,
+    NgxLoginComponent,
+    NgxRegisterComponent,
+    NgxLogoutComponent,
+    NgxRequestPasswordComponent,
+    NgxResetPasswordComponent
   ],
   exports: [
-    NbAuthComponent,
-    NbAuthBlockComponent,
-    NbLoginComponent,
-    NbRegisterComponent,
-    NbRequestPasswordComponent,
-    NbResetPasswordComponent,
-    NbLogoutComponent,
+    NgxAuthComponent,
+    NgxAuthBlockComponent,
+    NgxLoginComponent,
+    NgxRegisterComponent,
+    NgxLogoutComponent,
+    NgxRequestPasswordComponent,
+    NgxResetPasswordComponent
   ],
 })
 export class NbAuthModule {

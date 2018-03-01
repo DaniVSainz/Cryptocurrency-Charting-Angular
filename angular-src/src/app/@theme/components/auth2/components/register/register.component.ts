@@ -13,11 +13,11 @@ import { NbAuthResult } from '../../services/auth-result';
 
 
 @Component({
-  selector: 'nb-register',
+  selector: 'ngx-register',
   styleUrls: ['./register.component.scss'],
   template: `
-    <nb-auth-block>
-      <h2 class="title">Sign Up</h2>
+    <ngx-auth-block>
+      <h2 class="title">AHHHHHHHHH</h2>
       <form (ngSubmit)="register()" #form="ngForm">
 
         <div *ngIf="showMessages.error && errors && errors.length > 0 && !submitted"
@@ -144,10 +144,10 @@ import { NbAuthResult } from '../../services/auth-result';
           Already have an account? <a routerLink="../login"><strong>Sign in</strong></a>
         </small>
       </div>
-    </nb-auth-block>
+    </ngx-auth-block>
   `,
 })
-export class NbRegisterComponent {
+export class NgxRegisterComponent  {
 
   redirectDelay: number = 0;
   showMessages: any = {};

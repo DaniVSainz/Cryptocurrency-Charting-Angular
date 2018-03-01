@@ -12,10 +12,10 @@ import { NbAuthService } from '../../services/auth.service';
 import { NbAuthResult } from '../../services/auth-result';
 
 @Component({
-  selector: 'nb-reset-password-page',
+  selector: 'ngx-reset-password-page',
   styleUrls: ['./reset-password.component.scss'],
   template: `
-    <nb-auth-block>
+    <ngx-auth-block>
       <h2 class="title">Change password</h2>
       <small class="form-text sub-title">Please enter a new password</small>
       <form (ngSubmit)="resetPass()" #resetPassForm="ngForm">
@@ -83,10 +83,10 @@ import { NbAuthResult } from '../../services/auth-result';
           <a routerLink="../register"><strong>Sign Up</strong></a>
         </small>
       </div>
-    </nb-auth-block>
+    </ngx-auth-block>
   `,
 })
-export class NbResetPasswordComponent {
+export class NgxResetPasswordComponent {
 
   redirectDelay: number = 0;
   showMessages: any = {};

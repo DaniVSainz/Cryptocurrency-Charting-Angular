@@ -10,11 +10,10 @@ import { getDeepFromObject } from '../../helpers';
 
 import { NbAuthService } from '../../services/auth.service';
 import { NbAuthResult } from '../../services/auth-result';
-
 @Component({
-  selector: 'nb-login',
+  selector: 'ngx-login',
   template: `
-    <nb-auth-block>
+    <ngx-auth-block>
       <h2 class="title">Sign In</h2>
       <small class="form-text sub-title">Hello! Sign in with your username or email</small>
 
@@ -104,10 +103,10 @@ import { NbAuthResult } from '../../services/auth-result';
           Don't have an account? <a routerLink="../register"><strong>Sign Up</strong></a>
         </small>
       </div>
-    </nb-auth-block>
+    </ngx-auth-block>
   `,
 })
-export class NbLoginComponent {
+export class NgxLoginComponent  {
 
   redirectDelay: number = 0;
   showMessages: any = {};
@@ -138,8 +137,10 @@ export class NbLoginComponent {
 
       if (result.isSuccess()) {
         this.messages = result.getMessages();
+        
       } else {
         this.errors = result.getErrors();
+        console.log(this.errors);
       }
 
       const redirect = result.getRedirect();
