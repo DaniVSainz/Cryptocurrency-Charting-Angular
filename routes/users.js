@@ -9,14 +9,13 @@ var crypto = require('crypto');
 var nodemailer = require('nodemailer');
 
 
-
 router.post('/register', async (req,res,next) => {
   console.log(req.body);
   try {
     let newUser = new User ({
-      name: req.body.name,
+      name: req.body.fullName,
       email: req.body.email,
-      username: req.body.username,
+      username: req.body.fullName,
       password: req.body.password
     });
     let user;
