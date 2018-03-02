@@ -42,6 +42,12 @@ import { NB_AUTH_TOKEN_CLASS, NbAuthJWTToken } from './auth2';
             login: {
               endpoint: '/users/authenticate',
               method: 'post',
+              redirectDelay: 50000,
+              rememberMe: false,   // whether to show or not the `rememberMe` checkbox
+              showMessages: {     // show/not show success/error messages
+                success: true,
+                error: true,
+              }
             },
             register: {
               endpoint: '/users/register',
