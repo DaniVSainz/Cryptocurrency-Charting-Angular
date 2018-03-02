@@ -32,6 +32,8 @@ import { NgxResetPasswordComponent } from './components/reset-password/reset-pas
 import { routes } from './auth.routes';
 import { deepExtend } from './helpers';
 
+
+
 export function nbAuthServiceFactory(config: any, tokenService: NbTokenService, injector: Injector) {
   const providers = config.providers || {};
 

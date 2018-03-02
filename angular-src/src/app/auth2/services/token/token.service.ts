@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { of as observableOf } from 'rxjs/observable/of';
 import { filter } from 'rxjs/operators/filter';
@@ -7,6 +7,7 @@ import { share } from 'rxjs/operators/share';
 
 import { NbTokenStorage } from './token-storage';
 import { NbAuthToken } from './token';
+
 
 /**
  * Service that allows you to manage authentication token - get, set, clear and also listen to token changes over time.
