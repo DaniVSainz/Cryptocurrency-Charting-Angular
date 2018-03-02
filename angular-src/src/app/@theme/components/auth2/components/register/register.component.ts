@@ -17,7 +17,7 @@ import { NbAuthResult } from '../../services/auth-result';
   styleUrls: ['./register.component.scss'],
   template: `
     <ngx-auth-block>
-      <h2 class="title">AHHHHHHHHH</h2>
+      <h2 class="title">Sup Girl?</h2>
       <form (ngSubmit)="register()" #form="ngForm">
 
         <div *ngIf="showMessages.error && errors && errors.length > 0 && !submitted"
