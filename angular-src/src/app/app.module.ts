@@ -18,8 +18,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
 //Nebular Auth
-import { NbEmailPassAuthProvider, NbAuthModule } from './@theme/components/auth2';
-import { NB_AUTH_TOKEN_CLASS, NbAuthJWTToken } from './@theme/components/auth2';
+import { NbEmailPassAuthProvider, NbAuthModule } from './auth2';
+import { NB_AUTH_TOKEN_CLASS, NbAuthJWTToken } from './auth2';
 
 
 @NgModule({

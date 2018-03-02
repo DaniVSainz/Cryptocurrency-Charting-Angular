@@ -8,7 +8,7 @@ import {
   NgxRegisterComponent,
   NgxLogoutComponent,
   NgxRequestPasswordComponent
-} from './@theme/components/auth2/components';
+} from './auth2/components';
 // import { NgxAuthComponent,NgxLoginComponent, NgxRegisterComponent, NgxLogoutComponent,NgxRequestPasswordComponent,NgxResetPasswordComponent} from './@theme/components/auth';
 
 
