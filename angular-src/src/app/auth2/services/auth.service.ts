@@ -75,6 +75,7 @@ export class NbAuthService {
    * @returns {Observable<NbAuthResult>}
    */
   authenticate(provider: string, data?: any): Observable<NbAuthResult> {
+    console.log('HELLO');
     return this.getProvider(provider).authenticate(data)
       .pipe(
         switchMap((result: NbAuthResult) => {
