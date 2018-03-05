@@ -122,7 +122,7 @@ router.delete('/delete', passport.authenticate('jwt', {session:false}), (req, re
   }
 })
 
-router.post('/test', async (req,res,next) => {
+router.get('/test', async (req,res,next) => {
   try{
     await jwt.verify(token, process.env.secret , function(err, decoded) {
       console.log(decoded); // bar

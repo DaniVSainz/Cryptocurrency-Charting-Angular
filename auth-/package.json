@@ -5,7 +5,7 @@
   "scripts": {
     "build": "cd angular-src && ng build --prod && node fix-sw && cd .. && node bin/www",
     "heroku-postbuild": "cd angular-src && npm i && npm run sw-build-live && cd ..",
-    "start": "concurrently \"cd angular-src && ng build --watch\" \"nodemon bin/www\"",
+    "start": "concurrently \"nodemon bin/www\" \"cd.. && cd data-api/ && nodemon bin/www\"",
     "start2": "node ./bin/www"
   },
   "dependencies": {
