@@ -8,6 +8,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
+    title: 'Tables',
+    icon: 'nb-grid-b',
+    link: '/pages/tables',
+    home: true,
+    children: [
+      {
+        title:'Smart Table',
+        link:'/pages/tables/smart-table'
+      }
+    ]
+  },
+  {
     title: 'FEATURES',
     group: true,
   },
