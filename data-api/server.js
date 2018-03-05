@@ -6,6 +6,13 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const config = require('./config/database');
 var logger = require('morgan');
+
+//Our routes
+const users = require('./routes/users');
+const confirmation = require('./routes/confirmation');
+const scraper = require('./routes/scraper')
+
+//For .env variables
 require('dotenv').config()
 
 
@@ -33,8 +40,7 @@ mongoose.connection.on('error', (err) => {
 
 const app = express();
 
-const users = require('./routes/users');
-const confirmation = require('./routes/confirmation');
+
 
 //The port number inside of bin/www takes precendence
 // Port Number
@@ -60,8 +66,10 @@ app.use(passport.session());
 
 require('./config/passport')(passport);
 
+
 app.use('/users', users);
 app.use('/confirmation', confirmation);
+app.use('/data', scraper);
 
 
 
