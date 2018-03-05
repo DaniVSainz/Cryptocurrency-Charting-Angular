@@ -122,8 +122,16 @@ router.delete('/delete', passport.authenticate('jwt', {session:false}), (req, re
   }
 })
 
-router.get('/test', async (req,res,next) => {
-  return res.status(200).send({text: "Hello from our api"});
+router.post('/test', async (req,res,next) => {
+  try{
+    await jwt.verify(token, process.env.secret , function(err, decoded) {
+      console.log(decoded); // bar
+    });
+    return res.status(200).send({text: "Hello from our api"});
+  }catch(err){
+    next(err);
+  }
+
 });
 
 module.exports = router;
