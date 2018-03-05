@@ -13,6 +13,10 @@ const routes: Routes = [{
       component: DashboardComponent,
     },
     {
+      path: 'tables',
+      loadChildren: './tables/tables.module#TablesModule',
+    },
+    {
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full',
