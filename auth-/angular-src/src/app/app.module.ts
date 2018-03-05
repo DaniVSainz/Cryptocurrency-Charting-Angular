@@ -21,6 +21,9 @@ import { environment } from '../environments/environment';
 import { NbEmailPassAuthProvider, NbAuthModule } from './auth2';
 import { NB_AUTH_TOKEN_CLASS, NbAuthJWTToken } from './auth2';
 
+//Our authguard service to protect routes
+import { AuthGuard } from './services/auth-guard.service';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -77,7 +80,9 @@ import { NB_AUTH_TOKEN_CLASS, NbAuthJWTToken } from './auth2';
   bootstrap: [AppComponent],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
-    { provide: NB_AUTH_TOKEN_CLASS, useValue: NbAuthJWTToken },  ],
+    { provide: NB_AUTH_TOKEN_CLASS, useValue: NbAuthJWTToken },
+    AuthGuard
+  ],
 })
 export class AppModule {
 }

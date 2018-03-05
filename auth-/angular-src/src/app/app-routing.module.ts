@@ -9,6 +9,7 @@ import {
   NgxLogoutComponent,
   NgxRequestPasswordComponent
 } from './auth2';
+import { AuthGuard } from './services/auth-guard.service';
 // import { NgxAuthComponent,NgxLoginComponent, NgxRegisterComponent, NgxLogoutComponent,NgxRequestPasswordComponent,NgxResetPasswordComponent} from './@theme/components/auth';
 
 
@@ -16,7 +17,9 @@ import {
 
 
 const routes: Routes = [
-  { path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule' },
+  { path: 'pages', 
+    canActivate: [AuthGuard],
+    loadChildren: 'app/pages/pages.module#PagesModule' },
   {
     path: 'auth',
     component: NgxAuthComponent,
