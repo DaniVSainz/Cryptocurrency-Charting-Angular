@@ -1,3 +1,4 @@
+import { DataApiService } from './../services/data-api.service';
 import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';

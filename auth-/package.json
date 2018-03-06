@@ -9,6 +9,7 @@
     "start2": "node ./bin/www"
   },
   "dependencies": {
+    "@angular-devkit/core": "^0.4.3",
     "@angular/cli": "1.6.3",
     "@angular/compiler-cli": "^5.0.0",
     "@nebular/auth": "^2.0.0-rc.6",

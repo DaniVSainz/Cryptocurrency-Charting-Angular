@@ -1,3 +1,4 @@
+import { DataApiService } from './../../services/data-api.service';
 import { NgModule } from '@angular/core';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
@@ -16,6 +17,7 @@ import { SmartTableService } from '../../@core/data/smart-table.service';
   ],
   providers: [
     SmartTableService,
+    DataApiService
   ],
 })
 export class TablesModule { }
