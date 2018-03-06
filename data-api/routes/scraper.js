@@ -4,7 +4,21 @@ const axios = require("axios");
 const url = "https://api.coinmarketcap.com/v1/ticker/";
 const CryptoCurrency = require('../models/cryptoCurrency');
 
-router.get('/getall', async (req,res,next) => {
+router.get('/getall', async (req,res,next)=>{
+    try{
+        let data = await CryptoCurrency.find((err)=>{
+            if (err) console.log(err);
+        });
+        if(data){
+            res.status(200).json(data);
+        }
+    }catch(err){
+        res.status(500).json(err);
+        next(err);
+    }
+});
+
+router.get('/scrapeall', async (req,res,next) => {
     try{
         const response = await axios.get(url);
         console.log(response.data);
