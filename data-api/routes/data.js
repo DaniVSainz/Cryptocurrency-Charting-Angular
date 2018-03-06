@@ -25,6 +25,7 @@ router.get('/scrapeall', async (req,res,next) => {
         const data = response.data;
         let counter = 0;
         data.forEach(element => {
+            element.rank = parseInt(element.rank);
             let coin = new CryptoCurrency({
                 name: element.name,
                 symbol: element.symbol,

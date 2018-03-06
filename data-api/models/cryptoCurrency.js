@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const CryptoCurrencySchema =  mongoose.Schema({
     name: {type: String, required: true, unique:true},
     symbol: {type: String, required: true},
-    rank: {type: String, required: true},
+    rank: {type: Number, required: true},
     price_usd: {type: String, required: true},
     price_btc: {type: String, required: true},
     '24h_volume_usd': {type: String},

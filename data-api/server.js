@@ -10,7 +10,7 @@ var logger = require('morgan');
 //Our routes
 const users = require('./routes/users');
 const confirmation = require('./routes/confirmation');
-const scraper = require('./routes/scraper')
+const data = require('./routes/data')
 
 //For .env variables
 require('dotenv').config()
@@ -69,7 +69,7 @@ require('./config/passport')(passport);
 
 app.use('/users', users);
 app.use('/confirmation', confirmation);
-app.use('/data', scraper);
+app.use('/data', data);
 
 
 
