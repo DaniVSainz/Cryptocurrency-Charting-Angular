@@ -6,7 +6,7 @@ const CryptoCurrency = require('../models/cryptoCurrency');
 
 router.get('/getall', async (req,res,next)=>{
     try{
-        let data = await CryptoCurrency.find((err)=>{
+        let data = await CryptoCurrency.find({},(err)=>{
             if (err) console.log(err);
         });
         if(data){
