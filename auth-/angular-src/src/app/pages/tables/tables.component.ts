@@ -6,6 +6,5 @@ import { Component } from '@angular/core';
 })
 export class TablesComponent {
   constructor(){
-    console.log('Inside tables parent constructor');
   }
 }
