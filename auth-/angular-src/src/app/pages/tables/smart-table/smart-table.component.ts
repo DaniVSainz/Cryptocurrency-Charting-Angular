@@ -20,9 +20,17 @@ export class SmartTableComponent {
     columns: {
       rank: {
         title: 'rank',
-        editable: false,
-        addable: false,
+        sort: true,
+        sortDirection: 'asc'
+      },
+      name: {
+        title: 'name',
       }
+    },
+    actions: {
+      edit:false,
+      delete:false,
+      add:false,
     }
   };
 
