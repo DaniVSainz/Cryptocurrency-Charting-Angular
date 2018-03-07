@@ -1,0 +1,12 @@
+<app-navbar></app-navbar>
+<div >
+  <!-- <simple-notifications [options]="options"></simple-notifications> -->
+  <flash-messages></flash-messages>
+  <div>
+    <p *ngIf="!networkOnline">
+      With our modern site you can still browse offline however fetching data or saving data will not work <br>
+      As we cannot connect to databases to send or retrive it.Our site will give you a notification once you're back online :) .
+    </p>
+  </div>
+  <router-outlet></router-outlet>
+</div>

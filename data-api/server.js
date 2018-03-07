@@ -6,13 +6,6 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const config = require('./config/database');
 var logger = require('morgan');
-
-//Our routes
-const users = require('./routes/users');
-const confirmation = require('./routes/confirmation');
-const data = require('./routes/data')
-
-//For .env variables
 require('dotenv').config()
 
 
@@ -40,11 +33,12 @@ mongoose.connection.on('error', (err) => {
 
 const app = express();
 
-
+const users = require('./routes/users');
+const confirmation = require('./routes/confirmation');
 
 //The port number inside of bin/www takes precendence
 // Port Number
-// const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8080;
 
 
 app.use(logger('dev'));
@@ -54,8 +48,7 @@ app.use(logger('dev'));
 app.use(cors());
 
 // Set Static Folder
-// This was for setup using angular front end.
-// app.use(express.static(path.join(__dirname, 'angular-src/dist')));
+app.use(express.static(path.join(__dirname, 'angular-src/dist')));
 
 // Body Parser Middleware
 app.use(bodyParser.json());
@@ -66,10 +59,8 @@ app.use(passport.session());
 
 require('./config/passport')(passport);
 
-
 app.use('/users', users);
 app.use('/confirmation', confirmation);
-app.use('/data', data);
 
 
 
@@ -79,5 +70,12 @@ app.get('/', (req, res) => {
   res.send('invaild endpoint');
 });
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './angular-src/dist/index.html'));
+});
 
+// Start Server
+// app.listen(port, () => {
+//   console.log('Server started on port '+port);
+// });
 module.exports = app;

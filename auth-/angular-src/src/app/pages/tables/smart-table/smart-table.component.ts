@@ -11,6 +11,10 @@ import { SmartTableService } from '../../../@core/data/smart-table.service';
     nb-card {
       transform: translate3d(0, 0, 0);
     }
+    .red {
+      background-color:red;
+      color:red !important;
+    }
   `],
 })
 export class SmartTableComponent {
@@ -20,17 +24,37 @@ export class SmartTableComponent {
     columns: {
       rank: {
         title: 'rank',
+        type: "html",
         sort: true,
         sortDirection: 'asc'
       },
       name: {
         title: 'name',
+      },
+      price_usd:{
+        title:'price',
+        valuePrepareFunction: (value) => { return `$${value}` }
+      },
+      percent_change_24h:{
+        title:'24H',
+        type: 'html',
+        valuePrepareFunction: (value) => { 
+          let negative = false;
+          if(value.charAt(0) === '-'){
+            return `<span>${value}</span>`
+          }else{
+            return `<span style="color: green !important">${value}</span>`
+          }
+         }
+
       }
     },
     actions: {
       edit:false,
       delete:false,
       add:false,
+    },pager: {
+      perPage: 25
     }
   };
 
