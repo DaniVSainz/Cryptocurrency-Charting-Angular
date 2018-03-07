@@ -3,13 +3,9 @@
     "node": "8.9.4"
   },
   "scripts": {
-    "build": "cd angular-src && ng build --prod && node fix-sw && cd .. && node bin/www",
-    "heroku-postbuild": "cd angular-src && npm i && npm run sw-build-live && cd ..",
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "@angular/cli": "1.6.3",
-    "@angular/compiler-cli": "^5.0.0",
     "axios": "^0.18.0",
     "bcryptjs": "2.4.3",
     "body-parser": "1.18.2",
