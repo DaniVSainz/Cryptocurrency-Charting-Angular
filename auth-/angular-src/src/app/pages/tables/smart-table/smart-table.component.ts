@@ -15,6 +15,12 @@ import { SmartTableService } from '../../../@core/data/smart-table.service';
       background-color:red;
       color:red !important;
     }
+    :host /deep/ .green-cell {
+      color:green
+    }
+    :host /deep/ .red-cell {
+      color:red
+    }
   `],
 })
 export class SmartTableComponent {
@@ -41,9 +47,9 @@ export class SmartTableComponent {
         valuePrepareFunction: (value) => { 
           let negative = false;
           if(value.charAt(0) === '-'){
-            return `<span>${value}</span>`
+            return `<span class="red-cell">${value}</span>`;
           }else{
-            return `<span style="color: green !important">${value}</span>`
+            return `<p class="green-cell">${value}</p>` ;
           }
          }
 
