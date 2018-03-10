@@ -12,10 +12,10 @@ export class DataApiService {
   url:string =environment.url;
 
   top100() {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.get(`${this.url}/data/getall`, {headers: headers})
+    return this.http.get(`${this.url}/data/getall`)
       .map(res => res.json());
   }
+
+
 
 }
