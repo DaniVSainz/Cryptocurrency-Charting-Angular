@@ -16,6 +16,7 @@ const CryptoCurrencySchema =  mongoose.Schema({
     percent_change_7d: {type: String},
     last_updated: {type: String},
     exchange_id: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Exchange' },
+    coin_exchange: {type: String, required: true, unique:true},
 });
 
 const CryptoCurrency = module.exports = mongoose.model('CryptoCurrency', CryptoCurrencySchema);

@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const axios = require("axios");
-const url = "https://api.coinmarketcap.com/v1/ticker/";
 const CryptoCurrency = require('../models/cryptoCurrency');
+const Exchange = require('../models/exchange');
 
 router.get('/getall', async (req,res,next)=>{
     try{
@@ -18,8 +18,10 @@ router.get('/getall', async (req,res,next)=>{
     }
 });
 
-router.get('/scrapeall', async (req,res,next) => {
+router.get('/scrape/:id', async (req,res,next) => {
     try{
+        let exchange = await Exchange.findOne({name: req.params.id})
+        const url = "https://api.coinmarketcap.com/v1/ticker/";
         const response = await axios.get(url);
         console.log(response.data);
         const data = response.data;
@@ -40,10 +42,13 @@ router.get('/scrapeall', async (req,res,next) => {
                 percent_change_1h: element.percent_change_1h,
                 percent_change_24h: element.percent_change_24h,
                 percent_change_7d: element.percent_change_7d,
-                last_updated: element.last_updated 
+                last_updated: element.last_updated,
+                exchange_id: exchange._id,
+                coin_exchange: (element.name + exchange.name).replace(/\s/g,'') 
                 });
             coin.save(err=>{
                 if (err) console.log(err);
+                console.log(coin.name);
             });
         });
         res.status(200).send({text:"finished"});
