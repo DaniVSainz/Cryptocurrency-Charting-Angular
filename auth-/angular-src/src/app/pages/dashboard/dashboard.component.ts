@@ -1,8 +1,24 @@
-import { Component } from '@angular/core';
+import { DataApiService } from './../../services/data-api.service';
+import { Component,OnInit } from '@angular/core';
 
 @Component({
   selector: 'ngx-dashboard',
   templateUrl: './dashboard.component.html',
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
+  constructor( private dataService:DataApiService ){
+
+  }
+
+  ngOnInit() {
+    this.dataService.getBinance().subscribe(
+      res=>{
+        console.log(res);
+      }, err => {
+         err=err.json();
+         console.log(err)
+      }
+    )
+
+  }
 }

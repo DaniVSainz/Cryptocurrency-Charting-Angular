@@ -12,7 +12,12 @@ export class DataApiService {
   url:string =environment.url;
 
   top100() {
-    return this.http.get(`${this.url}/data/getall`)
+    return this.http.get(`${this.url}/coinmarketcap/getall`)
+      .map(res => res.json());
+  }
+
+  getBinance() {
+    return this.http.get(`${this.url}/binance/getbitcoin`)
       .map(res => res.json());
   }
 
