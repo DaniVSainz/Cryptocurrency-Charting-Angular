@@ -18,7 +18,7 @@ import { AuthGuard } from './services/auth-guard.service';
 
 const routes: Routes = [
   { path: 'pages', 
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     loadChildren: 'app/pages/pages.module#PagesModule' },
   {
     path: 'auth',
@@ -52,6 +52,10 @@ const routes: Routes = [
   },
   { path: '', redirectTo: 'pages', pathMatch: 'full' },
   { path: '**', redirectTo: 'pages' },
+  {
+    path: 'charts',
+    loadChildren: './charts/charts.module#ChartsModule',
+  },
 ];
 
 const config: ExtraOptions = {
