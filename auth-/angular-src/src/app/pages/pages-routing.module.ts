@@ -22,6 +22,10 @@ const routes: Routes = [{
       redirectTo: 'dashboard',
       pathMatch: 'full',
     },
+    {
+      path: 'charts',
+      loadChildren: './charts/charts.module#ChartsModule',
+    },
   ],
 }];
 

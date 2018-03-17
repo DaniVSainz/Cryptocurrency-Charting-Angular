@@ -52,10 +52,7 @@ const routes: Routes = [
   },
   { path: '', redirectTo: 'pages', pathMatch: 'full' },
   { path: '**', redirectTo: 'pages' },
-  {
-    path: 'charts',
-    loadChildren: './charts/charts.module#ChartsModule',
-  },
+
 ];
 
 const config: ExtraOptions = {
