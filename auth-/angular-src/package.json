@@ -58,7 +58,8 @@
     "angular2-chartjs": "0.4.1",
     "chart.js": "2.7.1",
     "ngx-echarts": "2.0.1",
-    "@swimlane/ngx-charts": "7.0.1"
+    "@swimlane/ngx-charts": "7.0.1",
+    "echarts": "^4.0.2"
   },
   "devDependencies": {
     "@angular/compiler-cli": "~5.2.6",
