@@ -23,7 +23,7 @@ export class EchartsMultipleXaxisComponent implements AfterViewInit, OnDestroy, 
           this.days = res;
           this.days.forEach(element => {
             this.dayData.push(element.date);
-            this.priceData.push(element.openingPrice);
+            this.priceData.push(element.openingPrice.replace(/,/g,""));
           });
           console.log('Setup Should be done #1')
 
@@ -44,7 +44,7 @@ export class EchartsMultipleXaxisComponent implements AfterViewInit, OnDestroy, 
  setChart(){
   console.log('Setup #2 if in order we should be good ')
   console.log(this.priceData);
-  
+
   this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
 
     const colors: any = config.variables;
