@@ -1,4 +1,5 @@
-import { Component, AfterViewInit, OnDestroy } from '@angular/core';
+import { DataApiService } from './../../../services/data-api.service';
+import { Component, AfterViewInit, OnDestroy, OnInit} from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 
 @Component({
@@ -7,11 +8,34 @@ import { NbThemeService } from '@nebular/theme';
     <div echarts [options]="options" class="echart"></div>
   `,
 })
-export class EchartsMultipleXaxisComponent implements AfterViewInit, OnDestroy {
+export class EchartsMultipleXaxisComponent implements AfterViewInit, OnDestroy, OnInit {
   options: any = {};
   themeSubscription: any;
+  days: any = [];
+  priceData: any = [];
+  dayData: any = [];
 
-  constructor(private theme: NbThemeService) {
+  constructor(
+    private theme: NbThemeService,
+    private dataApiService:DataApiService) {
+  }
+
+  ngOnInit(){
+    this.dataApiService.getBinance().subscribe(
+      res=>{
+        this.days = res;
+        console.log(this.days);
+        
+        this.days.forEach(element => {
+          this.dayData.push(element.date);
+          this.priceData.push(element.openingPrice);
+        });
+
+      }, err =>{
+        err = err.json();
+        console.log(err);
+      }
+    );
   }
 
   ngAfterViewInit() {
