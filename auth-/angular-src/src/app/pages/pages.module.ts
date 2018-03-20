@@ -5,6 +5,7 @@ import { PagesComponent } from './pages.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
+import { ChartComponent } from './chart/chart.component';
 
 
 
@@ -20,6 +21,7 @@ const PAGES_COMPONENTS = [
   ],
   declarations: [
     ...PAGES_COMPONENTS,
+    ChartComponent,
   ],
   providers:[
     DataApiService

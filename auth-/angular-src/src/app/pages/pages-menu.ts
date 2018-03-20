@@ -8,7 +8,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
-    title: 'Tables',
+    title: 'CryptoCurrencies',
     icon: 'nb-grid-b',
     link: '/pages/tables',
     home: true,

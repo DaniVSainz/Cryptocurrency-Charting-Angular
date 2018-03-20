@@ -1,3 +1,4 @@
+import { ChartComponent } from './chart/chart.component';
 import { AuthGuard } from './../services/auth-guard.service';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -23,8 +24,12 @@ const routes: Routes = [{
       pathMatch: 'full',
     },
     {
-      path: 'charts',
+      path: 'charts/:',
       loadChildren: './charts/charts.module#ChartsModule',
+    },
+    {
+      path: 'chart',
+      component: ChartComponent,
     },
   ],
 }];
