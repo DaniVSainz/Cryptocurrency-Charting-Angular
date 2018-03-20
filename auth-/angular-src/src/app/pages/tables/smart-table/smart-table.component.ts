@@ -91,4 +91,8 @@ export class SmartTableComponent {
       event.confirm.reject();
     }
   }
+
+  onUserRowSelect(event): void {
+    console.log(event.data);
+  }
 }

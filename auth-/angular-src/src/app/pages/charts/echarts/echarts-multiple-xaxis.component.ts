@@ -62,7 +62,7 @@ export class EchartsMultipleXaxisComponent implements AfterViewInit, OnDestroy, 
         },
       },
       legend: {
-        data: ['Bitcoin'],
+        data: [{name:"Bitcoin"}],
         textStyle: {
           color: echarts.textColor,
         },
@@ -73,6 +73,7 @@ export class EchartsMultipleXaxisComponent implements AfterViewInit, OnDestroy, 
       },
       xAxis: [
         {
+          boundaryGap:false,
           type: 'category',
           axisTick: {
             alignWithLabel: true,
