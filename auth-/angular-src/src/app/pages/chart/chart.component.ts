@@ -1,9 +1,11 @@
 import { DataApiService } from '../../services/data-api.service';
 import { Component, AfterViewInit, OnDestroy, OnInit} from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
+import { NgxEchartsModule } from 'ngx-echarts';
+
 
 @Component({
-  selector: 'ngx-echarts-multiple-xaxis',
+  selector: 'app-chart-component',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss']
 })
@@ -17,6 +19,7 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
   constructor(
     private theme: NbThemeService,
     private dataApiService:DataApiService) {
+      console.log('First line constructor');
       this.dataApiService.getBinance().subscribe(
         res=>{
           this.days = res;

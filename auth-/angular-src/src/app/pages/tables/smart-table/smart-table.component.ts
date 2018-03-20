@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { DataApiService } from './../../../services/data-api.service';
 import { Component } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
@@ -67,7 +68,7 @@ export class SmartTableComponent {
   source: LocalDataSource;
   apiData: any;
 
-  constructor(private service: SmartTableService, private dataService:DataApiService) {
+  constructor(private service: SmartTableService, private dataService:DataApiService, private router:Router) {
     // this.getData();
     // console.log('tables page');
     // const data = this.service.getData();
@@ -94,5 +95,7 @@ export class SmartTableComponent {
 
   onUserRowSelect(event): void {
     console.log(event.data);
+    console.log(event.data.symbol)
+    this.router.navigate([`pages/chart/${event.data.symbol}`]);
   }
 }

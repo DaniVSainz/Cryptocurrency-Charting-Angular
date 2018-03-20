@@ -24,11 +24,11 @@ const routes: Routes = [{
       pathMatch: 'full',
     },
     {
-      path: 'charts/:',
+      path: 'charts',
       loadChildren: './charts/charts.module#ChartsModule',
     },
     {
-      path: 'chart',
+      path: 'chart/:symbol',
       component: ChartComponent,
     },
   ],

@@ -6,6 +6,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { ChartComponent } from './chart/chart.component';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 
 
@@ -18,6 +19,7 @@ const PAGES_COMPONENTS = [
     PagesRoutingModule,
     ThemeModule,
     DashboardModule,
+    NgxEchartsModule
   ],
   declarations: [
     ...PAGES_COMPONENTS,
