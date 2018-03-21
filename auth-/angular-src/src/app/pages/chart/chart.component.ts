@@ -25,11 +25,9 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
     {
       // Grab our symbol from route ie: charts/btc =
       this.symbol = this.route.snapshot.params.symbol;
-      console.log(`Symbol is: ${this.symbol}`);
   }
 
   ngOnInit(){
-    console.log('First line constructor');
     // Get data from our api
     this.dataApiService.getPairData(this.symbol).subscribe(
       res=>{
@@ -41,8 +39,8 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
           this.dayData.push(element.date);
           this.priceData.push(element.openingPrice.replace(/,/g,""));
         });
-        console.log('Setup Should be done #1')
-
+        console.log(this.pair);
+        // Calls our functions that constructs are chart, doing it this way to ensure our data is finished processing.
         this.setChart();
       }, err =>{
         err = err.json();
