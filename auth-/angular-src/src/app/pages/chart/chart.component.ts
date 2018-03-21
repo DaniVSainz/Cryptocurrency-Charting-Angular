@@ -110,7 +110,11 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
             },
           },
           axisPointer: {
-            label: this.dayData,
+            label: {formatter: params => {
+              return (
+                params.value + (params.seriesData.length ? ' ：Price $' + params.seriesData[0].data : '')
+              );
+            }},
           },
           data: this.dayData,
         },
