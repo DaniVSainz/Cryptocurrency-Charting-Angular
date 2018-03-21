@@ -1,7 +1,7 @@
+import { ActivatedRoute } from '@angular/router';
 import { DataApiService } from '../../services/data-api.service';
 import { Component, AfterViewInit, OnDestroy, OnInit} from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
-import { NgxEchartsModule } from 'ngx-echarts';
 
 
 @Component({
@@ -15,37 +15,47 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
   days: any = [];
   priceData: any = [];
   dayData: any = [];
+  symbol: String;
+  pair: Object;
 
   constructor(
     private theme: NbThemeService,
-    private dataApiService:DataApiService) {
-      console.log('First line constructor');
-      this.dataApiService.getBinance().subscribe(
-        res=>{
-          this.days = res;
-          this.days.forEach(element => {
-            this.dayData.push(element.date);
-            this.priceData.push(element.openingPrice.replace(/,/g,""));
-          });
-          console.log('Setup Should be done #1')
-
-          this.setChart();
-        }, err =>{
-          err = err.json();
-          console.log(`ERROR : ${err}`);
-        }
-      );
+    private dataApiService:DataApiService,
+    private route: ActivatedRoute) 
+    {
+      // Grab our symbol from route ie: charts/btc =
+      this.symbol = this.route.snapshot.params.symbol;
+      console.log(`Symbol is: ${this.symbol}`);
   }
 
   ngOnInit(){
+    console.log('First line constructor');
+    // Get data from our api
+    this.dataApiService.getPairData(this.symbol).subscribe(
+      res=>{
+        //Grab our pair and pair.days from response
+        this.pair = res[0].pair
+        this.days = res[1].days;
+        //Iterate and create a array of days/price
+        this.days.forEach(element => {
+          this.dayData.push(element.date);
+          this.priceData.push(element.openingPrice.replace(/,/g,""));
+        });
+        console.log('Setup Should be done #1')
+
+        this.setChart();
+      }, err =>{
+        err = err.json();
+        console.log(`ERROR : ${err}`);
+      }
+    );
   }
 
   ngAfterViewInit() {
   }
 
  setChart(){
-  console.log('Setup #2 if in order we should be good ')
-  console.log(this.priceData);
+
 
   this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
 
@@ -64,7 +74,15 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
         },
       },
       legend: {
-        data: [{name:"Bitcoin"}],
+        data: [{
+          name: 'Bitcoin',
+          // compulsorily set icon as a circle
+          icon: 'circle',
+          // set up the text in red
+          textStyle: {
+              color: 'black'
+          }
+      }],
         textStyle: {
           color: echarts.textColor,
         },

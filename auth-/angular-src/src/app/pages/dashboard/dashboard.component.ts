@@ -11,14 +11,6 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataService.getBinance().subscribe(
-      res=>{
-        console.log(res);
-      }, err => {
-         err=err.json();
-         console.log(err)
-      }
-    )
-
   }
+  
 }

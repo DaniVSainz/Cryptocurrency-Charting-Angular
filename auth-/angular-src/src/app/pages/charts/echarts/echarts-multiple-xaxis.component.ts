@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { DataApiService } from './../../../services/data-api.service';
 import { Component, AfterViewInit, OnDestroy, OnInit} from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
@@ -17,25 +18,27 @@ export class EchartsMultipleXaxisComponent implements AfterViewInit, OnDestroy, 
 
   constructor(
     private theme: NbThemeService,
-    private dataApiService:DataApiService) {
-      this.dataApiService.getBinance().subscribe(
-        res=>{
-          this.days = res;
-          this.days.forEach(element => {
-            this.dayData.push(element.date);
-            this.priceData.push(element.openingPrice.replace(/,/g,""));
-          });
-          console.log('Setup Should be done #1')
-
-          this.setChart();
-        }, err =>{
-          err = err.json();
-          console.log(`ERROR : ${err}`);
-        }
-      );
-  }
+    private dataApiService:DataApiService,
+    private route: ActivatedRoute
+    ) {
+    }
 
   ngOnInit(){
+    this.dataApiService.getPairData("BTC").subscribe(
+      res=>{
+        this.days = res;
+        this.days.forEach(element => {
+          this.dayData.push(element.date);
+          this.priceData.push(element.openingPrice.replace(/,/g,""));
+        });
+        console.log('Setup Should be done #1')
+
+        this.setChart();
+      }, err =>{
+        err = err.json();
+        console.log(`ERROR : ${err}`);
+      }
+    );
   }
 
   ngAfterViewInit() {

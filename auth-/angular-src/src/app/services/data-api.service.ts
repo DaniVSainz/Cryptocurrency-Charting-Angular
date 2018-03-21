@@ -16,8 +16,8 @@ export class DataApiService {
       .map(res => res.json());
   }
 
-  getBinance() {
-    return this.http.get(`${this.url}/binance/getbitcoin`)
+  getPairData(symbol) {
+    return this.http.get(`${this.url}/binance/getpairdata/${symbol}`)
       .map(res => res.json());
   }
 
