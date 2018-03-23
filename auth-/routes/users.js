@@ -46,7 +46,15 @@ router.post('/register', async (req,res,next) => {
                                 text: `Hello,\n\n  Please verify your account by clicking the link: \n http://${req.headers.host}/emailVerification/${token.token}  \n` };
           transporter.sendMail(mailOptions, function (err) {
               if (err) { return res.status(500).json({ msg: err.message })};
-              res.status(200).json({success: true, msg: "You've successfully registered, please check your email to confirm your email address."});
+
+              const jwtToken = jwt.sign({data: user}, config.secret, {
+                expiresIn: 604800 // 1 week
+              });
+              res.status(200).send({
+                msg:`You're now logged in`,
+                success: true,
+                token: 'JWT '+ jwtToken,
+              });
           });
         })
       }

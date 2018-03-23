@@ -66,7 +66,7 @@ export class SmartTableComponent {
   };
 
   source: LocalDataSource;
-  apiData: any;
+  lastUpdated: String;
 
   constructor(private service: SmartTableService, private dataService:DataApiService, private router:Router) {
     // this.getData();
@@ -81,7 +81,7 @@ export class SmartTableComponent {
 
   getData(){
     this.dataService.top100().subscribe(res=>{
-      this.apiData = res;
+
     })
   };
 
