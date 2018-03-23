@@ -71,8 +71,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-  // res.sendFile(path.join(__dirname, './angular-src/dist/index.html'));
-  res.sendfile(path.resolve(__dirname, './angular-src/dist/index.html'));
+  res.sendFile(path.join(__dirname, './angular-src/dist/index.html'));
 });
 
 // Start Server

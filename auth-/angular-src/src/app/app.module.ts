@@ -62,7 +62,7 @@ import { HttpModule } from '@angular/http';
                method: 'post',
              },
              requestPass: {
-               endpoint: '/auth/request-pass',
+               endpoint: '/confirmation/reset',
                method: 'post',
              },
              resetPass: {
