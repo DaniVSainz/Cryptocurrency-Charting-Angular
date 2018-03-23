@@ -76,7 +76,7 @@ router.post('/reset', (req,res,next) => {
         var mailOptions = { from: 'no-reply@yourwebapplication.com',
                              to: user.email, subject: 'Account Password Reset',
                              text: `Hello \n\n 
-                                    You can reset your password by visiting: http://${req.headers.host}/resetpw/${token.token} \n\n
+                                    You can reset your password by visiting: http://${req.headers.host}/#/auth/reset-password/${token.token} \n\n
                                     For your security this link only works for 1 hour.`};
         transporter.sendMail(mailOptions, function (err) {
             if (err) { return res.status(500).send({ msg: err.message }); }
