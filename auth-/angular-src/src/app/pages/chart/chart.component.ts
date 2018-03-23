@@ -39,6 +39,7 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
           this.dayData.push(element.date);
           this.priceData.push(element.openingPrice.replace(/,/g,""));
         });
+        console.log( this.days)
         console.log(this.pair);
         // Calls our functions that constructs are chart, doing it this way to ensure our data is finished processing.
         this.setChart();

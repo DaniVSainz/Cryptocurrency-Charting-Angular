@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-12">
     <nb-card>
-      <nb-card-header *ngIf="this.pair">{{this.pair.name}}</nb-card-header>
+      <nb-card-header *ngIf="this.pair && this.days">{{this.pair.name}}    Last Updated: {{ this.days[this.days.length -1].date}}</nb-card-header>
       <nb-card-body>
         <div echarts [options]="options" class="echart"></div>
       </nb-card-body>

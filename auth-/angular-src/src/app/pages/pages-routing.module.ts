@@ -10,17 +10,17 @@ const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
-    {
-      path: 'dashboard',
-      component: DashboardComponent,
-    },
+    // {
+    //   path: 'dashboard',
+    //   component: DashboardComponent,
+    // },
     {
       path: 'tables',
       loadChildren: './tables/tables.module#TablesModule',
     },
     {
       path: '',
-      redirectTo: 'dashboard',
+      redirectTo: 'tables/smart-table',
       pathMatch: 'full',
     },
     {
