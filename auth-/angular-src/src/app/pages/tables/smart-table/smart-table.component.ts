@@ -36,7 +36,7 @@ export class SmartTableComponent {
           if(value.charAt(0) === '-'){
             return `<span class="red-cell">${value}</span>`;
           }else{
-            return `<p class="green-cell">${value}</p>` ;
+            return `<p class="green-cell">+${value}</p>` ;
           }
          }
 
