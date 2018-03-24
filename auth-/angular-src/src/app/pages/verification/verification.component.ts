@@ -25,7 +25,7 @@ export class VerificationComponent implements OnInit {
   verifyEmail(){
     this.authService.verifyEmail(this.token).subscribe(res=>{
       this.msg = res.msg;
-      this.router.navigate(['login']);
+      // this.router.navigate(['login']);
     }, err =>{
       err = err.json();
       this.msg = err.msg;
