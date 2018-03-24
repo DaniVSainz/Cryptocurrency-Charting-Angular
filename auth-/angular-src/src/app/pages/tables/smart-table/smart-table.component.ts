@@ -8,21 +8,7 @@ import { SmartTableService } from '../../../@core/data/smart-table.service';
 @Component({
   selector: 'ngx-smart-table',
   templateUrl: './smart-table.component.html',
-  styles: [`
-    nb-card {
-      transform: translate3d(0, 0, 0);
-    }
-    .red {
-      background-color:red;
-      color:red !important;
-    }
-    :host /deep/ .green-cell {
-      color:green
-    }
-    :host /deep/ .red-cell {
-      color:red
-    }
-  `],
+  styleUrls: ['./smart-table.component.scss']
 })
 export class SmartTableComponent {
 
