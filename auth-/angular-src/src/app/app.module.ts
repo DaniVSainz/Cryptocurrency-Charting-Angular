@@ -24,6 +24,7 @@ import { NB_AUTH_TOKEN_CLASS, NbAuthJWTToken } from './auth2';
 //Our authguard service to protect routes
 import { AuthGuard } from './services/auth-guard.service';
 import { HttpModule } from '@angular/http';
+import { MyAuthService } from './services/my-auth.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -82,7 +83,7 @@ import { HttpModule } from '@angular/http';
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
     { provide: NB_AUTH_TOKEN_CLASS, useValue: NbAuthJWTToken },
-    AuthGuard
+    AuthGuard,MyAuthService
   ],
 })
 export class AppModule {

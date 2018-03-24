@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { VerificationComponent } from './verification/verification.component';
 
 const routes: Routes = [{
   path: '',
@@ -30,6 +31,10 @@ const routes: Routes = [{
     {
       path: 'chart/:symbol',
       component: ChartComponent,
+    },
+    {
+      path: 'verification/:token',
+      component: VerificationComponent,
     },
   ],
 }];

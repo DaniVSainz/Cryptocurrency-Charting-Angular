@@ -7,6 +7,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { ChartComponent } from './chart/chart.component';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { VerificationComponent } from './verification/verification.component';
 
 
 
@@ -24,6 +25,7 @@ const PAGES_COMPONENTS = [
   declarations: [
     ...PAGES_COMPONENTS,
     ChartComponent,
+    VerificationComponent,
   ],
   providers:[
     DataApiService
