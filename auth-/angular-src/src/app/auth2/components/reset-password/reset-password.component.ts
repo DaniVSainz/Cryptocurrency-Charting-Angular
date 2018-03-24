@@ -1,9 +1,10 @@
+import { ActivatedRoute } from '@angular/router';
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NB_AUTH_OPTIONS } from '../../auth.options';
 import { getDeepFromObject } from '../../helpers';
@@ -16,7 +17,7 @@ import { NbAuthResult } from '../../services/auth-result';
   styleUrls: ['./reset-password.component.scss'],
   templateUrl: './reset-password.component.html',
 })
-export class NgxResetPasswordComponent {
+export class NgxResetPasswordComponent implements OnInit {
 
   redirectDelay: number = 0;
   showMessages: any = {};
@@ -29,17 +30,24 @@ export class NgxResetPasswordComponent {
 
   constructor(protected service: NbAuthService,
               @Inject(NB_AUTH_OPTIONS) protected config = {},
-              protected router: Router) {
+              protected router: Router,
+              private route: ActivatedRoute) {
 
     this.redirectDelay = this.getConfigValue('forms.resetPassword.redirectDelay');
     this.showMessages = this.getConfigValue('forms.resetPassword.showMessages');
     this.provider = this.getConfigValue('forms.resetPassword.provider');
   }
+  
+  ngOnInit(){
+    this.route.params.subscribe(params=>{
+        this.user.token = params.token;
+      })
+  }
 
   resetPass(): void {
     this.errors = this.messages = [];
     this.submitted = true;
-
+    console.log(this.user)
     this.service.resetPassword(this.provider, this.user).subscribe((result: NbAuthResult) => {
       this.submitted = false;
       if (result.isSuccess()) {

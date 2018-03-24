@@ -88,6 +88,7 @@ router.post('/reset', (req,res,next) => {
 
 router.post('/reset/password', (req,res,next) => {
     console.log(req.body);
+    console.log(req.body.token);
     resetPassToken.findOne({ token: req.body.token }, function (err, token) {
         if (!token) return res.status(400).send({ type: 'not-verified', msg: 'We were unable to find a valid token. Your token my have expired.' });
 

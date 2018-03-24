@@ -66,7 +66,7 @@ import { HttpModule } from '@angular/http';
                method: 'post',
              },
              resetPass: {
-               endpoint: '/auth/reset-pass',
+               endpoint: '/confirmation/reset/password',
                method: 'post',
              },
              token: {
