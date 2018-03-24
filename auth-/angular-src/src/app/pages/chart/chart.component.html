@@ -3,18 +3,18 @@
     <nb-card>
       <nb-card-header *ngIf="this.pair && this.days">
         {{this.pair.name}}    Last Updated: {{ this.days[this.days.length -1].date}}
-          <div class="col text-right">
-            <div ngbDropdown class="d-inline-block">
-              <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Time Range: {{this.currentTimeRange}}</button>
-              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <button class="dropdown-item" (click)="change30Days()">30 Days</button>
-                <button class="dropdown-item" (click)="change90Days()">90 Days</button>
-                <button class="dropdown-item" (click)="change365Days()">1 year</button>
-                <button class="dropdown-item" (click)="changeAllDays()">All Time</button>
-
-              </div>
-            </div>
+        <div class="col text-right">
+          <div class="dropdown ghost-dropdown d-inline-block" ngbDropdown>
+              <button class="btn btn-success" type="button" ngbDropdownToggle>Time Range: {{this.currentTimeRange}}</button>
+              <ul class="dropdown-menu" ngbDropdownMenu>
+                <li class="dropdown-item" (click)="change7Days()">7 Days</li>
+                <li class="dropdown-item" (click)="change30Days()">30 Days</li>
+                <li class="dropdown-item" (click)="change90Days()">90 Days</li>
+                <li class="dropdown-item" (click)="change365Days()">1 Year</li>
+                <li class="dropdown-item" (click)="changeAllDays()">All Time</li>
+              </ul>
           </div>
+      </div>
       </nb-card-header>
       <nb-card-body>
         <div echarts [options]="options"  class="echart"></div>
@@ -22,3 +22,4 @@
     </nb-card>
   </div>
 </div>
+

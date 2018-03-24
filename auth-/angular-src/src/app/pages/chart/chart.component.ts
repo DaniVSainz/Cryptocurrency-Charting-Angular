@@ -57,6 +57,19 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
 
+  change7Days(){
+    this.currentTimeRange = '30 Days'
+    this.currentDays =  [];
+    this.currentPrices =  [] ;
+    for (let i = 1; i < 8; i++) {
+      let day = this.days[this.days.length - i ];
+      this.currentDays.push(day.date);
+      this.currentPrices.push(day.openingPrice.replace(/,/g,"")); 
+    }
+    this.setChart(this.currentDays.reverse(),this.currentPrices.reverse());
+    // this.setChart(this.currentDays,this.currentPrices);
+  }
+
 
   change30Days(){
     this.currentTimeRange = '30 Days'
@@ -124,9 +137,6 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
           type: 'cross',
         },
       },
-      title: {
-        text: 'Bitcoin'
-      },
       // legend: {
       //   data: [{
       //     name: 'Bitcoin',
@@ -145,6 +155,11 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
       //   top: 70,
       //   bottom: 50,
       // },
+      toolbox:{
+        feature:{
+          saveAsImage:{}
+        }
+      },
       dataZoom: [
         {
             id: 'dataZoomX',
@@ -176,6 +191,7 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
             textStyle: {
               color: echarts.textColor,
             },
+            showMaxLabel: true
           },
           axisPointer: {
             label: {formatter: params => {
@@ -204,6 +220,7 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
             textStyle: {
               color: echarts.textColor,
             },
+            showMaxLabel: true
           },
         },
       ],
