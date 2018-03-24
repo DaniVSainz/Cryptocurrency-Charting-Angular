@@ -20,6 +20,7 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
   reversedArray: any = [];
   currentDays: any= [];
   currentPrices: any= [];
+  currentTimeRange: String = 'All Time';
 
   constructor(
     private theme: NbThemeService,
@@ -59,8 +60,11 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
 
 
 
-  changeDay(){
+  change30Days(){
     console.log('button clicked');
+    this.currentTimeRange = '30 Days'
+    this.currentDays =  [];
+    this.currentPrices =  [] ;
     for (let i = 1; i < 31; i++) {
       let day = this.days[this.days.length - i ];
       console.log(day);
@@ -69,6 +73,45 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
     }
     console.log('setting chart');
     this.setChart(this.currentDays.reverse(),this.currentPrices.reverse());
+    // this.setChart(this.currentDays,this.currentPrices);
+  }
+
+  change90Days(){
+    console.log('button clicked');
+    this.currentTimeRange = '90 Days'
+    this.currentDays =  [];
+    this.currentPrices =  [] ;
+    for (let i = 1; i < 91; i++) {
+      let day = this.days[this.days.length - i ];
+      console.log(day);
+      this.currentDays.push(day.date);
+      this.currentPrices.push(day.openingPrice.replace(/,/g,"")); 
+    }
+    console.log('setting chart');
+    this.setChart(this.currentDays.reverse(),this.currentPrices.reverse());
+    // this.setChart(this.currentDays,this.currentPrices);
+  }
+
+  change365Days(){
+    console.log('button clicked');
+    this.currentTimeRange = '1 Year'
+    this.currentDays =  [];
+    this.currentPrices =  [] ;
+    for (let i = 1; i < 365; i++) {
+      let day = this.days[this.days.length - i ];
+      console.log(day);
+      this.currentDays.push(day.date);
+      this.currentPrices.push(day.openingPrice.replace(/,/g,"")); 
+    }
+    console.log('setting chart');
+    this.setChart(this.currentDays.reverse(),this.currentPrices.reverse());
+    // this.setChart(this.currentDays,this.currentPrices);
+  }
+
+  changeAllDays(){
+    console.log('setting chart');
+    this.currentTimeRange = 'All Time'
+    this.setChart(this.dayData,this.priceData);
     // this.setChart(this.currentDays,this.currentPrices);
   }
 
