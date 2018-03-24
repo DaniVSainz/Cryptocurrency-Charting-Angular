@@ -17,6 +17,9 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
   dayData: any = [];
   symbol: String;
   pair: Object;
+  reversedArray: any = [];
+  currentDays: any= [];
+  currentPrices: any= [];
 
   constructor(
     private theme: NbThemeService,
@@ -42,7 +45,8 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
         console.log( this.days)
         console.log(this.pair);
         // Calls our functions that constructs are chart, doing it this way to ensure our data is finished processing.
-        this.setChart();
+        this.setChart(this.dayData,this.priceData);
+        
       }, err =>{
         err = err.json();
         console.log(`ERROR : ${err}`);
@@ -53,9 +57,25 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
   ngAfterViewInit() {
   }
 
- setChart(){
 
 
+  changeDay(){
+    console.log('button clicked');
+    for (let i = 1; i < 31; i++) {
+      let day = this.days[this.days.length - i ];
+      console.log(day);
+      this.currentDays.push(day.date);
+      this.currentPrices.push(day.openingPrice.replace(/,/g,"")); 
+    }
+    console.log('setting chart');
+    this.setChart(this.currentDays.reverse(),this.currentPrices.reverse());
+    // this.setChart(this.currentDays,this.currentPrices);
+  }
+
+
+
+
+ setChart(dayData,priceData){
   this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
 
     const colors: any = config.variables;
@@ -90,7 +110,7 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
         top: 70,
         bottom: 50,
       },
-      xAxis: [
+      xAxis: [ 
         {
           boundaryGap:false,
           type: 'category',
@@ -115,7 +135,7 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
               );
             }},
           },
-          data: this.dayData,
+          data: dayData,
         },
       ],
       yAxis: [
@@ -142,7 +162,7 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
         {
           type: 'line',
           smooth: true,
-          data:this.priceData,
+          data:priceData,
         },
       ],
     };
