@@ -43,8 +43,6 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
           this.dayData.push(element.date);
           this.priceData.push(element.openingPrice.replace(/,/g,""));
         });
-        console.log( this.days)
-        console.log(this.pair);
         // Calls our functions that constructs are chart, doing it this way to ensure our data is finished processing.
         this.setChart(this.dayData,this.priceData);
         
@@ -61,56 +59,47 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
 
 
   change30Days(){
-    console.log('button clicked');
     this.currentTimeRange = '30 Days'
     this.currentDays =  [];
     this.currentPrices =  [] ;
     for (let i = 1; i < 31; i++) {
       let day = this.days[this.days.length - i ];
-      console.log(day);
       this.currentDays.push(day.date);
       this.currentPrices.push(day.openingPrice.replace(/,/g,"")); 
     }
-    console.log('setting chart');
     this.setChart(this.currentDays.reverse(),this.currentPrices.reverse());
     // this.setChart(this.currentDays,this.currentPrices);
   }
 
   change90Days(){
-    console.log('button clicked');
     this.currentTimeRange = '90 Days'
     this.currentDays =  [];
     this.currentPrices =  [] ;
     for (let i = 1; i < 91; i++) {
       let day = this.days[this.days.length - i ];
-      console.log(day);
       this.currentDays.push(day.date);
       this.currentPrices.push(day.openingPrice.replace(/,/g,"")); 
     }
-    console.log('setting chart');
     this.setChart(this.currentDays.reverse(),this.currentPrices.reverse());
     // this.setChart(this.currentDays,this.currentPrices);
   }
 
   change365Days(){
-    console.log('button clicked');
     this.currentTimeRange = '1 Year'
     this.currentDays =  [];
     this.currentPrices =  [] ;
     for (let i = 1; i < 365; i++) {
       let day = this.days[this.days.length - i ];
-      console.log(day);
       this.currentDays.push(day.date);
       this.currentPrices.push(day.openingPrice.replace(/,/g,"")); 
     }
-    console.log('setting chart');
     this.setChart(this.currentDays.reverse(),this.currentPrices.reverse());
     // this.setChart(this.currentDays,this.currentPrices);
   }
 
   changeAllDays(){
-    console.log('setting chart');
     this.currentTimeRange = 'All Time'
+    console.log(this.dayData);
     this.setChart(this.dayData,this.priceData);
     // this.setChart(this.currentDays,this.currentPrices);
   }
@@ -135,24 +124,41 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
           type: 'cross',
         },
       },
-      legend: {
-        data: [{
-          name: 'Bitcoin',
-          // compulsorily set icon as a circle
-          icon: 'circle',
-          // set up the text in red
-          textStyle: {
-              color: 'black'
-          }
-      }],
-        textStyle: {
-          color: echarts.textColor,
+      title: {
+        text: 'Bitcoin'
+      },
+      // legend: {
+      //   data: [{
+      //     name: 'Bitcoin',
+      //     // compulsorily set icon as a circle
+      //     icon: 'circle',
+      //     // set up the text in red
+      //     textStyle: {
+      //         color: 'black'
+      //     }
+      // }],
+      //   textStyle: {
+      //     color: echarts.textColor,
+      //   },
+      // },
+      // grid: {
+      //   top: 70,
+      //   bottom: 50,
+      // },
+      dataZoom: [
+        {
+            id: 'dataZoomX',
+            type: 'slider',
+            xAxisIndex: [0],
+            filterMode: 'filter'
         },
-      },
-      grid: {
-        top: 70,
-        bottom: 50,
-      },
+        {
+            id: 'dataZoomY',
+            type: 'slider',
+            yAxisIndex: [0],
+            filterMode: 'empty'
+        }
+    ],
       xAxis: [ 
         {
           boundaryGap:false,
