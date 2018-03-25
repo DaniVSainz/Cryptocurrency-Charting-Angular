@@ -24,7 +24,7 @@ export class SmartTableComponent {
       name: {
         title: 'name',
         type: 'html',
-        valuePrepareFunction: (value) => { return `<span><img src="assets/images/coins/${value}.png" />${value}<span>` }
+        valuePrepareFunction: (value) => { return `<span><img src="assets/images/coins/${value}.png" class="icon-img" />  ${value}<span>` }
       },
       price_usd:{
         title:'price',
@@ -49,12 +49,14 @@ export class SmartTableComponent {
       delete:false,
       add:false,
     },pager: {
-      perPage: 25
+      perPage: 25,
+      display: true,
     }
   };
 
   source: LocalDataSource;
   lastUpdated: String;
+  response: any;
 
   constructor(private service: SmartTableService, private dataService:DataApiService, private router:Router) {
     // this.getData();
@@ -63,8 +65,13 @@ export class SmartTableComponent {
     this.source = new LocalDataSource();
 
     this.dataService.top100().subscribe(res=>{
+      this.response = res;
       this.source.load(res);
     })
+  }
+
+  changePager(){
+    this.source.setPaging(1,1000);
   }
 
   getData(){
