@@ -18,13 +18,13 @@ export class SmartTableComponent {
       rank: {
         title: 'rank',
         type: "html",
-        sort: true,
-        sortDirection: 'asc'
+        // sort: true,
+        // sortDirection: 'asc'
       },
       name: {
         title: 'name',
         type: 'html',
-        valuePrepareFunction: (value) => { return `<span><img src="assets/images/coins/${value}.png" class="icon-img" />  ${value}<span>` }
+        valuePrepareFunction: (value) => { return `<span><img src="assets/images/coins/${value.split(' ').join('_')}.png" class="icon-img" />  ${value}<span>` }
       },
       price_usd:{
         title:'price',
