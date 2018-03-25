@@ -176,7 +176,7 @@ export class NbEmailPassAuthProvider extends NbAbstractAuthProvider {
         this.getConfigValue('token.key')),
     },
     errors: {
-      key: 'data.errors',
+      key: 'data.error.errors',
       getter: (module: string, res: HttpErrorResponse) => getDeepFromObject(res.error,
         this.getConfigValue('errors.key'),
         this.getConfigValue(`${module}.defaultErrors`)),

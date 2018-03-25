@@ -1,3 +1,4 @@
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
@@ -25,6 +26,7 @@ import { NB_AUTH_TOKEN_CLASS, NbAuthJWTToken } from './auth2';
 import { AuthGuard } from './services/auth-guard.service';
 import { HttpModule } from '@angular/http';
 import { MyAuthService } from './services/my-auth.service';
+import { getDeepFromObject } from './auth2/helpers';
 
 @NgModule({
   declarations: [AppComponent],

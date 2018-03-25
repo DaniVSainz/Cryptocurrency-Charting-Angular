@@ -23,6 +23,8 @@ export class SmartTableComponent {
       },
       name: {
         title: 'name',
+        type: 'html',
+        valuePrepareFunction: (value) => { return `<span><img src="assets/images/coins/${value}.png" />${value}<span>` }
       },
       price_usd:{
         title:'price',
