@@ -52,8 +52,8 @@ router.post('/register', async (req,res,next) => {
               });
               res.status(200).send({
                 msg:`You're now logged in`,
-                success: true,
-                token: 'JWT '+ jwtToken,
+                // success: true,
+                // token: 'JWT '+ jwtToken,
               });
           });
         })
