@@ -21,6 +21,7 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
   currentDays: any= [];
   currentPrices: any= [];
   currentTimeRange: String = 'All Time';
+  updateOptions: any;
 
   constructor(
     private theme: NbThemeService,
@@ -69,7 +70,25 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
         this.currentDays.push(day.date);
         this.currentPrices.push(day.openingPrice.replace(/,/g,"")); 
       }
-      this.setChart(this.currentDays.reverse(),this.currentPrices.reverse());
+      this.currentDays.reverse();
+      this.currentPrices.reverse();
+      this.updateOptions = {
+        xAxis:[{data:this.currentDays}],
+        series: [
+          {
+            type: 'line',
+            smooth: true,
+            data:this.currentPrices,
+          },
+        ],
+        yAxis:{
+          min:Math.min(...this.currentPrices),
+          max:Math.max(...this.currentPrices)
+        }
+      };
+
+      // this.setChart(this.currentDays.reverse(),this.currentPrices.reverse());
+
     }
   }
 
@@ -81,7 +100,7 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
     const echarts: any = config.variables.echarts;
 
 
-
+    
     this.options = {
       backgroundColor: echarts.bg,
       color: [colors.success, colors.info],
@@ -119,13 +138,13 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
             id: 'dataZoomX',
             type: 'slider',
             xAxisIndex: [0],
-            filterMode: 'filter'
+            filterMode: 'filter',
         },
         {
             id: 'dataZoomY',
             type: 'slider',
             yAxisIndex: [0],
-            filterMode: 'empty'
+            filterMode: 'empty',
         }
     ],
       xAxis: [ 
@@ -160,6 +179,7 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
       yAxis: [
         {
           type: 'value',
+          min:priceData[0],
           axisLine: {
             lineStyle: {
               color: echarts.axisLineColor,
