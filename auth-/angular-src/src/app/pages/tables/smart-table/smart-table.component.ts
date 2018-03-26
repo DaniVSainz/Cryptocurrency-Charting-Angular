@@ -26,11 +26,6 @@ export class SmartTableComponent {
         type: 'html',
         valuePrepareFunction: (value) => { return `<span><img src="assets/images/coins/${value.split(' ').join('_')}.png" class="icon-img" />  ${value}<span>` }
       },
-      chart: {
-        title: '7 Day Chart',
-        type: 'html',
-        valuePrepareFunction: (value) => { return `<img src="assets/images/charts/${value}.png"/ class="chart-img">` }
-      },
       price_usd:{
         title:'price',
         valuePrepareFunction: (value) => { return `$${value}` }
@@ -46,8 +41,12 @@ export class SmartTableComponent {
             return `<p class="green-cell">+${value}</p>` ;
           }
          }
-
-      }
+      },
+      chart: {
+        title: '7 Day Chart',
+        type: 'html',
+        valuePrepareFunction: (value) => { return `<img src="assets/images/charts/${value}.png"/ class="chart-img">` }
+      },
     },
     actions: {
       edit:false,
