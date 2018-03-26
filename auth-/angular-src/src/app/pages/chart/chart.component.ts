@@ -56,68 +56,22 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
   ngAfterViewInit() {
   }
 
-
-  change7Days(){
-    this.currentTimeRange = '30 Days'
-    this.currentDays =  [];
-    this.currentPrices =  [] ;
-    for (let i = 1; i < 8; i++) {
-      let day = this.days[this.days.length - i ];
-      this.currentDays.push(day.date);
-      this.currentPrices.push(day.openingPrice.replace(/,/g,"")); 
+  changeDays(days){
+    if(days ==='All') {
+      this.currentTimeRange = `All Time`;
+      this.setChart(this.dayData,this.priceData);
+    }else {
+      this.currentTimeRange = `${days} Days`
+      this.currentDays =  [];
+      this.currentPrices =  [] ;
+      for (let i = 1; i < parseInt(days) + 1; i++) {
+        let day = this.days[this.days.length - i ];
+        this.currentDays.push(day.date);
+        this.currentPrices.push(day.openingPrice.replace(/,/g,"")); 
+      }
+      this.setChart(this.currentDays.reverse(),this.currentPrices.reverse());
     }
-    this.setChart(this.currentDays.reverse(),this.currentPrices.reverse());
-    // this.setChart(this.currentDays,this.currentPrices);
   }
-
-
-  change30Days(){
-    this.currentTimeRange = '30 Days'
-    this.currentDays =  [];
-    this.currentPrices =  [] ;
-    for (let i = 1; i < 31; i++) {
-      let day = this.days[this.days.length - i ];
-      this.currentDays.push(day.date);
-      this.currentPrices.push(day.openingPrice.replace(/,/g,"")); 
-    }
-    this.setChart(this.currentDays.reverse(),this.currentPrices.reverse());
-    // this.setChart(this.currentDays,this.currentPrices);
-  }
-
-  change90Days(){
-    this.currentTimeRange = '90 Days'
-    this.currentDays =  [];
-    this.currentPrices =  [] ;
-    for (let i = 1; i < 91; i++) {
-      let day = this.days[this.days.length - i ];
-      this.currentDays.push(day.date);
-      this.currentPrices.push(day.openingPrice.replace(/,/g,"")); 
-    }
-    this.setChart(this.currentDays.reverse(),this.currentPrices.reverse());
-    // this.setChart(this.currentDays,this.currentPrices);
-  }
-
-  change365Days(){
-    this.currentTimeRange = '1 Year'
-    this.currentDays =  [];
-    this.currentPrices =  [] ;
-    for (let i = 1; i < 365; i++) {
-      let day = this.days[this.days.length - i ];
-      this.currentDays.push(day.date);
-      this.currentPrices.push(day.openingPrice.replace(/,/g,"")); 
-    }
-    this.setChart(this.currentDays.reverse(),this.currentPrices.reverse());
-    // this.setChart(this.currentDays,this.currentPrices);
-  }
-
-  changeAllDays(){
-    this.currentTimeRange = 'All Time'
-    console.log(this.dayData);
-    this.setChart(this.dayData,this.priceData);
-    // this.setChart(this.currentDays,this.currentPrices);
-  }
-
-
 
 
  setChart(dayData,priceData){

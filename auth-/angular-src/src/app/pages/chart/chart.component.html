@@ -7,11 +7,11 @@
           <div class="dropdown ghost-dropdown d-inline-block" id="day-selector-container" ngbDropdown>
               <button class="btn btn-success" type="button" ngbDropdownToggle>Time Range: {{this.currentTimeRange}}</button>
               <ul class="dropdown-menu" ngbDropdownMenu>
-                <li class="dropdown-item" (click)="change7Days()">7 Days</li>
-                <li class="dropdown-item" (click)="change30Days()">30 Days</li>
-                <li class="dropdown-item" (click)="change90Days()">90 Days</li>
-                <li class="dropdown-item" (click)="change365Days()">1 Year</li>
-                <li class="dropdown-item" (click)="changeAllDays()">All Time</li>
+                <li class="dropdown-item" (click)="changeDays('7')">7 Days</li>
+                <li class="dropdown-item" (click)="changeDays('30')">30 Days</li>
+                <li class="dropdown-item" (click)="changeDays('90')">90 Days</li>
+                <li class="dropdown-item" (click)="changeDays('365')">1 Year</li>
+                <li class="dropdown-item" (click)="changeDays('All')">All Time</li>
               </ul>
           </div>
       </div>
