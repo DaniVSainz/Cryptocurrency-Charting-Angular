@@ -84,7 +84,24 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
         yAxis:{
           min:Math.min(...this.currentPrices),
           max:Math.max(...this.currentPrices)
-        }
+        },
+        dataZoom: [
+          {
+              id: 'dataZoomX',
+              type: 'slider',
+              xAxisIndex: [0],
+              filterMode: 'filter',
+          },
+          {
+              id: 'dataZoomY',
+              type: 'slider',
+              yAxisIndex: [0],
+              filterMode: 'empty',
+              startValue: Math.min(...this.currentPrices),
+              endValue: Math.max(...this.currentPrices)
+
+          }
+      ],
       };
 
       // this.setChart(this.currentDays.reverse(),this.currentPrices.reverse());
