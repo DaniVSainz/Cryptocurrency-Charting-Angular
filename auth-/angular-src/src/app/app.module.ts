@@ -49,6 +49,7 @@ import { getDeepFromObject } from './auth2/helpers';
             login: {
               endpoint: '/users/authenticate',
               method: 'post',
+              rememberMe: false,   // whether to show or not the `rememberMe` checkbox
             },
             register: {
               endpoint: '/users/register',
@@ -77,7 +78,7 @@ import { getDeepFromObject } from './auth2/helpers';
           endpoint: '/users/authenticate',
           provider: 'email',
           method: 'post',
-          redirectDelay: 5000,
+          redirectDelay: 2000,
           rememberMe: false,   // whether to show or not the `rememberMe` checkbox
           showMessages: {     // show/not show success/error messages
             success: true,

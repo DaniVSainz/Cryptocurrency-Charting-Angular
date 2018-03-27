@@ -1,6 +1,7 @@
 import { MyAuthService } from './../../services/my-auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { NbTokenStorage } from '../../auth2';
 
 @Component({
   selector: 'verification',
@@ -13,7 +14,8 @@ export class VerificationComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private authService: MyAuthService) { }
+              private authService: MyAuthService,
+              private tokenStorage: NbTokenStorage) { }
 
   ngOnInit() {
     this.route.params.subscribe(params=>{
@@ -25,6 +27,7 @@ export class VerificationComponent implements OnInit {
   verifyEmail(){
     this.authService.verifyEmail(this.token).subscribe(res=>{
       this.msg = res.msg;
+      this.tokenStorage.clear();
       // this.router.navigate(['login']);
     }, err =>{
       err = err.json();

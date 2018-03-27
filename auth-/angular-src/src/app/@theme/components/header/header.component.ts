@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
       if (token.isValid()) {
         let data = token.getPayload().data;
         this.user = {
-          name: data.name
+          name: data.name,
         };
         // here we receive a payload from the token and assigne it to our `user` variable 
       }

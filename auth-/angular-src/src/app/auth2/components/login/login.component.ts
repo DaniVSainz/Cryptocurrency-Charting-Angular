@@ -25,6 +25,7 @@ export class NgxLoginComponent  {
   user: any = {};
   submitted: boolean = false;
   socialLinks: NbAuthSocialLink[] = [];
+  rememberMe: boolean ;
 
   constructor(protected service: NbAuthService,
               @Inject(NB_AUTH_OPTIONS) protected config = {},
@@ -34,12 +35,13 @@ export class NgxLoginComponent  {
     this.showMessages = this.getConfigValue('forms.login.showMessages');
     this.provider = this.getConfigValue('forms.login.provider');
     this.socialLinks = this.getConfigValue('forms.login.socialLinks');
+    this.rememberMe = this.getConfigValue('forms.login.rememberMe');
+
   }
 
   login(): void {
     this.errors = this.messages = [];
     this.submitted = true;
-
     this.service.authenticate(this.provider, this.user).subscribe((result: NbAuthResult) => {
       this.submitted = false;
       if (result.isSuccess()) {
