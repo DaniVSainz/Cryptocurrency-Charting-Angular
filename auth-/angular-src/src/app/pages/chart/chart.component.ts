@@ -22,6 +22,7 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
   currentPrices: any= [];
   currentTimeRange: String = 'All Time';
   updateOptions: any;
+  noData: String;
 
   constructor(
     private theme: NbThemeService,
@@ -37,18 +38,18 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
     this.dataApiService.getPairData(this.symbol).subscribe(
       res=>{
         //Grab our pair and pair.days from response
-        this.pair = res[0].pair
-        this.days = res[1].days;
-        //Iterate and create a array of days/price
-        this.days.forEach(element => {
-          this.dayData.push(element.date);
-          this.priceData.push(element.openingPrice.replace(/,/g,""));
-        });
-        // Calls our functions that constructs are chart, doing it this way to ensure our data is finished processing.
-        this.setChart(this.dayData,this.priceData);
+          this.pair = res[0].pair
+          this.days = res[1].days;
+          //Iterate and create a array of days/price
+          this.days.forEach(element => {
+            this.dayData.push(element.date);
+            this.priceData.push(element.openingPrice.replace(/,/g,""));
+          });
+          // Calls our functions that constructs are chart, doing it this way to ensure our data is finished processing.
+          this.setChart(this.dayData,this.priceData);
         
       }, err =>{
-        err = err.json();
+        this.noData = "Sorry we don't have data for this coin"
         console.log(`ERROR : ${err}`);
       }
     );
@@ -65,6 +66,8 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
       this.currentTimeRange = `${days} Days`
       this.currentDays =  [];
       this.currentPrices =  [] ;
+      // Check incase we dont have enough data to support X days 
+      if (this.days.length <= parseInt(days)) days = this.days.length;
       for (let i = 1; i < parseInt(days) + 1; i++) {
         let day = this.days[this.days.length - i ];
         this.currentDays.push(day.date);
@@ -196,7 +199,7 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
       yAxis: [
         {
           type: 'value',
-          min:priceData[0],
+          min:0,
           axisLine: {
             lineStyle: {
               color: echarts.axisLineColor,
@@ -227,6 +230,10 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
  }
 
   ngOnDestroy(): void {
-    this.themeSubscription.unsubscribe();
+    try {
+      this.themeSubscription.unsubscribe();
+    }catch (e){
+      console.log(e)
+    }
   }
 }
