@@ -24,6 +24,7 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
   updateOptions: any;
   noData: boolean;
   cryptoCurrency: any;
+  cssStyleString: String;
 
   constructor(
     private theme: NbThemeService,
@@ -60,6 +61,15 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   ngAfterViewInit() {
+  }
+
+  positiveOrNegative(data){
+    console.log('asd')
+    if(data[0]==="-"){
+      return 'text-danger'
+    }else{
+      return 'text-success'
+    }
   }
 
   changeDays(days){
