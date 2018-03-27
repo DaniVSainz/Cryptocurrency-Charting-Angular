@@ -1,11 +1,17 @@
 <div class="row">
   <div class="col-lg-12">
     <nb-card>
-        <nb-card-header *ngIf="noData">{{noData}}</nb-card-header>
-      <nb-card-header *ngIf="this.pair && this.days">
-        {{this.pair.name}}    Last Updated: {{ this.days[this.days.length -1].date}}
+      <nb-card-header>
+        <div class="row">
+          <div class="col text-left">
+            <div>
+              <span *ngIf="noData">{{noData}}</span>
+              <span *ngIf="noData == false">{{this.pair.name}}</span>
+              <span *ngIf="noData == false">Pairing: {{this.pair.symbol}}/{{this.pair.quoteAsset}}</span>
+            </div> 
+        </div>
         <div class="col text-right">
-          <div class="dropdown ghost-dropdown d-inline-block" id="day-selector-container" ngbDropdown>
+          <div  *ngIf="!noData" class="dropdown ghost-dropdown d-inline-block" id="day-selector-container" ngbDropdown>
               <button class="btn btn-success" type="button" ngbDropdownToggle>Time Range: {{this.currentTimeRange}}</button>
               <ul class="dropdown-menu" ngbDropdownMenu>
                 <li class="dropdown-item" (click)="changeDays('7')">7 Days</li>
@@ -16,6 +22,7 @@
               </ul>
           </div>
       </div>
+    </div>
       </nb-card-header>
       <nb-card-body *ngIf="dayData">
         <div echarts [options]="options" [merge]="updateOptions" class="echart"></div>

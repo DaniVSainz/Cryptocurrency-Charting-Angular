@@ -22,7 +22,7 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
   currentPrices: any= [];
   currentTimeRange: String = 'All Time';
   updateOptions: any;
-  noData: String;
+  noData: boolean;
 
   constructor(
     private theme: NbThemeService,
@@ -37,19 +37,21 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
     // Get data from our api
     this.dataApiService.getPairData(this.symbol).subscribe(
       res=>{
+        this.noData=false
         //Grab our pair and pair.days from response
-          this.pair = res[0].pair
-          this.days = res[1].days;
-          //Iterate and create a array of days/price
-          this.days.forEach(element => {
-            this.dayData.push(element.date);
-            this.priceData.push(element.openingPrice.replace(/,/g,""));
-          });
-          // Calls our functions that constructs are chart, doing it this way to ensure our data is finished processing.
-          this.setChart(this.dayData,this.priceData);
+        this.pair = res[0].pair
+        this.days = res[1].days;
+        //Iterate and create a array of days/price
+        this.days.forEach(element => {
+          this.dayData.push(element.date);
+          this.priceData.push(element.openingPrice.replace(/,/g,""));
+        });
+        console.log(this.pair)
+        // Calls our functions that constructs are chart, doing it this way to ensure our data is finished processing.
+        this.setChart(this.dayData,this.priceData);
         
       }, err =>{
-        this.noData = "Sorry we don't have data for this coin"
+        this.noData = true
         console.log(`ERROR : ${err}`);
       }
     );
