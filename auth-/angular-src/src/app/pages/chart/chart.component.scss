@@ -8,4 +8,9 @@
     outline-color: nb-theme(color-success)   
   }
 
+  .list-blocks{
+    display: flex;
+    flex-direction: column;
+  }
+
 }

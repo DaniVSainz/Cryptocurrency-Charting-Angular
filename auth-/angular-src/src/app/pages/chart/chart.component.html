@@ -3,13 +3,17 @@
     <nb-card>
       <nb-card-header>
         <div class="row">
-          <div class="col text-left">
-            <div>
-              <span *ngIf="noData">{{noData}}</span>
-              <span *ngIf="noData == false">{{this.pair.name}}</span>
-              <span *ngIf="noData == false">Pairing: {{this.pair.symbol}}/{{this.pair.quoteAsset}}</span>
-            </div> 
-        </div>
+          <div class="col-2 text-left list-blocks">
+            <span *ngIf="noData">{{noData}}</span>
+            <span *ngIf="noData == false">{{this.pair.name}}</span>
+            <span *ngIf="noData == false">Pairing: <span class="text-success">{{this.pair.symbol}}</span>/{{this.pair.quote_asset}}</span>
+          </div>
+          <div class="col-2 text-left list-blocks">
+            <span *ngIf="noData">{{noData}}</span>
+            <span *ngIf="noData == false">{{this.pair.name}}</span>
+            <span *ngIf="noData == false">Pairing: <span class="text-success">{{this.pair.symbol}}</span>/{{this.pair.quote_asset}}</span>
+          </div>
+        
         <div class="col text-right">
           <div  *ngIf="!noData" class="dropdown ghost-dropdown d-inline-block" id="day-selector-container" ngbDropdown>
               <button class="btn btn-success" type="button" ngbDropdownToggle>Time Range: {{this.currentTimeRange}}</button>
