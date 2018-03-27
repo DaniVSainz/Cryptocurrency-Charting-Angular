@@ -23,6 +23,7 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
   currentTimeRange: String = 'All Time';
   updateOptions: any;
   noData: boolean;
+  cryptoCurrency: any;
 
   constructor(
     private theme: NbThemeService,
@@ -41,12 +42,13 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
         //Grab our pair and pair.days from response
         this.pair = res[0].pair
         this.days = res[1].days;
+        this.cryptoCurrency = res[2].cryptoCurrency
         //Iterate and create a array of days/price
         this.days.forEach(element => {
           this.dayData.push(element.date);
           this.priceData.push(element.openingPrice.replace(/,/g,""));
         });
-        console.log(this.pair)
+        console.log(this.cryptoCurrency)
         // Calls our functions that constructs are chart, doing it this way to ensure our data is finished processing.
         this.setChart(this.dayData,this.priceData);
         
