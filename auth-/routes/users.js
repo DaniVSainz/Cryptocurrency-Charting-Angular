@@ -76,7 +76,7 @@ router.post('/authenticate', async(req, res, next) => {
 
   let user = await User.findOne({email: email});
   if(!user) {
-    return res.status(400).send({success: false, msg: 'Incorrect username or password'});
+    return res.status(400).send({success: false, errors: 'Incorrect username or password'});
   }
   if(user.isVerified == false){
     return res.status(400).send({success: false, isVerified:false, errors: `Email is not verified, please verify to log in.`})
@@ -95,7 +95,7 @@ router.post('/authenticate', async(req, res, next) => {
         token: 'JWT '+token,
       });
     } else {
-      return res.status(400).json({success: false,isVerified:true, msg: 'Incorrect username or password'});
+      return res.status(400).json({success: false,isVerified:true, errors: 'Incorrect username or password'});
     }
   });
 });
