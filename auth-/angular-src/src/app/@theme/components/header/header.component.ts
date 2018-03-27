@@ -30,7 +30,6 @@ export class HeaderComponent implements OnInit {
 
       if (token.isValid()) {
         let data = token.getPayload().data;
-        console.log(data); 
         this.user = {
           name: data.name
         };
