@@ -8,13 +8,13 @@
           </div>
           <div class="col-sm text-left list-blocks" *ngIf="noData == false">
             <span ><img src="assets/images/coins/{{cryptoCurrency.name.split(' ').join('_')}}.png" class="icon-img" /> {{this.pair.name}}</span>
-            <span >Pairing: <span class="text-success">{{this.pair.symbol}}</span>/{{this.pair.quote_asset}}</span>
             <span >Current Price: ${{cryptoCurrency.price_usd}}</span>
+            <span >Pairing: <span class="text-success">{{this.pair.symbol}}</span>/{{this.pair.quote_asset}}</span>
           </div>
           <div class="col-sm text-left list-blocks" *ngIf="cryptoCurrency">
-            <span>Percent Change 1 Hour:<span [className]="positiveOrNegative(cryptoCurrency.percent_change_1h)">{{cryptoCurrency.percent_change_1h}}</span></span>
-            <span>Percent Change 24 Hours: <span [className]="positiveOrNegative(cryptoCurrency.percent_change_24h)">{{cryptoCurrency.percent_change_24h}}</span></span>
-            <span >Percent Change 7 Days: <span [className]="positiveOrNegative(cryptoCurrency.percent_change_7d)">{{cryptoCurrency.percent_change_7d}}</span></span>
+            <span>Percent Change 1 Hour:<span [className]="positiveOrNegative(cryptoCurrency.percent_change_1h)">{{cryptoCurrency.percent_change_1h}}%</span></span>
+            <span>Percent Change 24 Hours: <span [className]="positiveOrNegative(cryptoCurrency.percent_change_24h)">{{cryptoCurrency.percent_change_24h}}%</span></span>
+            <span >Percent Change 7 Days: <span [className]="positiveOrNegative(cryptoCurrency.percent_change_7d)">{{cryptoCurrency.percent_change_7d}}%</span></span>
           </div>
           <div class="col-sm text-left list-blocks" *ngIf="cryptoCurrency">
               <span >24H Volume: ${{cryptoCurrency['24h_volume_usd'] | number:minFractionDigits}}</span>
