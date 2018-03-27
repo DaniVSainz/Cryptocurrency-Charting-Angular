@@ -42,20 +42,21 @@ export class NgxLoginComponent  {
 
     this.service.authenticate(this.provider, this.user).subscribe((result: NbAuthResult) => {
       this.submitted = false;
-      console.log(result);
       if (result.isSuccess()) {
         this.messages = result.getMessages();
+        console.log(this.messages)
       } else {
         this.errors = result.getErrors();
+        console.log(this.messages)
       }
 
 
-      // const redirect = result.getRedirect();
-      // if (redirect) {
-      //   setTimeout(() => {
-      //     return this.router.navigateByUrl(redirect);
-      //   }, this.redirectDelay);
-      // }
+      const redirect = result.getRedirect();
+      if (redirect) {
+        setTimeout(() => {
+          return this.router.navigateByUrl(redirect);
+        }, this.redirectDelay);
+      }
     });
   }
 

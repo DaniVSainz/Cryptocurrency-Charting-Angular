@@ -23,37 +23,37 @@ router.post('/register', async (req,res,next) => {
     //Check if username is unique
     user = await User.findOne({username: newUser.username});
     if (user) {
-      return res.status(400).json({success: false, msg: `An Account with username:  ${newUser.username} already exists`});
+      return res.status(400).json({success: false, errors: `An Account with username:  ${newUser.username} already exists`});
     }
 
     //Check if email is unique
     user = await User.findOne({email:newUser.email});
     if (user) {
-      return res.status(400).json({success: false, msg: `An Account with email:  ${newUser.email} already exists`});
+      return res.status(400).json({success: false, errors: `An Account with email:  ${newUser.email} already exists`});
     }
 
     User.addUser(newUser , (err,user)=>{
-      if (err) res.status(500).json({success: false, msg: 'Failed to register user'});
+      if (err) res.status(500).json({success: false, errors: 'Failed to register user'});
       else{
         token = new Token({ _userId: user._id, token: crypto.randomBytes(16).toString('hex') });
 
         token.save(err=>{
-          if(err) res.status(500).json({success: false, msg: `Encountered and Unknown error: ${err}`});
+          if(err) res.status(500).json({success: false, errors: `Encountered and Unknown error: ${err}`});
           // Send the email
           var transporter = nodemailer.createTransport({ service: 'gmail', auth: { user: process.env.userEmail, pass: process.env.userPass } });
           var mailOptions = { from: 'no-reply@yourwebapplication.com',
                                 to: user.email, subject: 'Account Verification Token',
                                 text: `Hello,\n\n  Please verify your account by clicking the link: \n http://${req.headers.host}/#/pages/verification/${token.token}  \n` };
           transporter.sendMail(mailOptions, function (err) {
-              if (err) { return res.status(500).json({ msg: err.message })};
+              if (err) { return res.status(500).json({ errors: err.message })};
 
               const jwtToken = jwt.sign({data: user}, config.secret, {
                 expiresIn: 604800 // 1 week
               });
               res.status(200).send({
-                msg:`You're now logged in`,
-                // success: true,
-                // token: 'JWT '+ jwtToken,
+                msg:`You've registered to our site.Please check your email for a verification link`,
+                success: true,
+                token: 'JWT '+ jwtToken,
               });
           });
         })
