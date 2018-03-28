@@ -18,6 +18,8 @@ export class SmartTableComponent {
       rank: {
         title: 'rank',
         type: "html",
+        width:'5%',
+        valuePrepareFunction: (value) => { return `<div class="text-center">${value}</div>` }
         // sort: true,
         // sortDirection: 'asc'
       },
