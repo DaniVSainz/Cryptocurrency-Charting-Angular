@@ -45,7 +45,7 @@ import { getDeepFromObject } from './auth2/helpers';
         email: {
           service: NbEmailPassAuthProvider,
           config: {
-            baseEndpoint: 'http://localhost:3000',
+            baseEndpoint: 'http://159.89.48.60:3000',
             login: {
               endpoint: '/users/authenticate',
               method: 'post',
