@@ -28,6 +28,8 @@ import { HttpModule } from '@angular/http';
 import { MyAuthService } from './services/my-auth.service';
 import { getDeepFromObject } from './auth2/helpers';
 
+let url = environment.urlUsers;
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -45,7 +47,7 @@ import { getDeepFromObject } from './auth2/helpers';
         email: {
           service: NbEmailPassAuthProvider,
           config: {
-            baseEndpoint: 'http://159.89.48.60:3000',
+            baseEndpoint: url,
             login: {
               endpoint: '/users/authenticate',
               method: 'post',
