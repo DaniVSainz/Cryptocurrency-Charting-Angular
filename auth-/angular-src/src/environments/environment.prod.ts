@@ -5,6 +5,6 @@
  */
 export const environment = {
   production: true,
-  urlUsers: "159.89.48.60:3000",
+  urlUsers: "danivs.com",
   url:"http://192.168.1.155:3001"
 };
