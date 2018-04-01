@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const DaySchema =  mongoose.Schema({
-    pair_id: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Pair' },
     date:{type:Date, required:true},
     openEpoch:{type:Number},
     openTime:{type:Date},
@@ -15,7 +14,8 @@ const DaySchema =  mongoose.Schema({
     totalTrades:{type:Number},
     closeTime:{type:Date},
     price_usd:{type:Number},
-    changePercent:{type:Number}
+    changePercent:{type:Number},
+    pair_id: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Pair' }
 },{timestamps:true});
 
 const Day = module.exports = mongoose.model('Day', DaySchema);
