@@ -57,4 +57,16 @@ router.get('/scrape/:id', async (req,res,next) => {
     }
 });
 
+router.get('/coinmarketcap', async (req,res,next) => {
+    try{
+        let coinMarketCap = await Exchange.coinMarketCap();
+        res.status(200).send({coinMarketCap})
+        
+    }catch(err){
+        next(err)
+    }
+});
+
 module.exports = router;
+
+
