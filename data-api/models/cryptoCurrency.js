@@ -13,7 +13,8 @@ const CryptoCurrencySchema =  mongoose.Schema({
     max_supply:{type:String},
     percent_change_1h:{type:String},
     percent_change_24h:{type:String},
-    percent_change_7d:{type:String}
+    percent_change_7d:{type:String},
+    last_updated:{type:String}
 },{timestamps:true});
 
 const CryptoCurrency = module.exports = mongoose.model('CryptoCurrency', CryptoCurrencySchema);
