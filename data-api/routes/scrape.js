@@ -22,13 +22,13 @@ router.get('/getall', async (req,res,next)=>{
 router.get('/coinmarketcap', async (req,res,next) => {
     try{
         let coinMarketCap = await Exchange.coinMarketCap();
-        // const url = "https://api.coinmarketcap.com/v1/ticker/?limit=0";
-        // const response = await axios.get(url);
-        // const data = response.data;
+        const url = "https://api.coinmarketcap.com/v1/ticker/?limit=0";
+        const response = await axios.get(url);
+        const data = response.data;
 
-        const response = fs.readFileSync('../testResponses/coinMarketCapTicker.json')
-        let data = await JSON.parse(response);
-        data = data;
+        // const response = fs.readFileSync('../testResponses/coinMarketCapTicker.json')
+        // let data = await JSON.parse(response);
+        // data = data;
 
         const time = new Date();
         let counter = 0;
@@ -95,7 +95,7 @@ router.get('/coinmarketcap', async (req,res,next) => {
         res.status(200).send({
             saved:`Saved: ${saved} coins`,
             updated:`Updated ${updated} coin`,
-            responseLength:`Response contained ${i} items`,
+            responseLength:`Response contained ${i-1} items`,
             lastItem:`Last item in response: ${data[i-1].name}`,
             firstItem:`First item in response: ${data[0].name}`
         })
@@ -104,35 +104,6 @@ router.get('/coinmarketcap', async (req,res,next) => {
     }
 });
 
-router.get('/deleteduplicates', async (req,res,next) => {
-    let coinArray = await CryptoCurrency.find({});
-    let rankArray;
-    let coinToDelete;
-    let deleted=0;
-    let i=0;
-    console.log(coinArray);
-
-    for(i;i<coinArray.length;i++){
-        rankArray = await CryptoCurrency.find({rank:coinArray[i].rank})
-        if (rankArray.length > 1){
-            coinToDelete = ()=>{
-                for(let a=0;a<rankArray.length;a++){
-                    if(a==0) coinToDelete == rankArray[a];
-                    else if(rankArray[a].updatedAt < coinToDelete.updatedAt) coinToDelete = rankArray[a];
-                }
-                coinToDelete;
-            }
-            await CryptoCurrency.remove({coinToDelete},(err)=>{
-                if(err){
-                    console.log(err);
-                }else{
-                    deleted++;
-                }
-            });
-        }
-    }
-    res.status(200).send({deleted})
-});
 
 module.exports = router;
 
