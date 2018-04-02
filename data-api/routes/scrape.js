@@ -22,18 +22,19 @@ router.get('/getall', async (req,res,next)=>{
 router.get('/coinmarketcap', async (req,res,next) => {
     try{
         let coinMarketCap = await Exchange.coinMarketCap();
-        // const url = "https://api.coinmarketcap.com/v1/ticker/?limit=0";
-        // const response = await axios.get(url);
-        // const data = response.data;
+        const url = "https://api.coinmarketcap.com/v1/ticker/?limit=0";
+        const response = await axios.get(url);
+        const data = response.data;
 
-        const response = fs.readFileSync('../testResponses/coinMarketCapTicker.json')
-        let data = await JSON.parse(response);
-        data = data;
+        // const response = fs.readFileSync('../testResponses/coinMarketCapTicker.json')
+        // let data = await JSON.parse(response);
+        // data = data;
 
-
+        const time = new Date();
         let counter = 0;
         let coin;
         let saved = 0;
+        let updated = 0;
         let i=0;
         for(i;i<data.length;i++){
             data[i].rank = parseInt(data[i].rank);
@@ -61,7 +62,9 @@ router.get('/coinmarketcap', async (req,res,next) => {
                     saved++;
                 });
             }else{
-                if(coin.length == 1){
+                if(coin.length == 1 && coin[0].last_updated != data[i].last_updated){
+                    coin = coin[0];
+
                     coin.set({
                         name: data[i].name,
                         symbol: data[i].symbol,
@@ -77,11 +80,14 @@ router.get('/coinmarketcap', async (req,res,next) => {
                         percent_change_24h: data[i].percent_change_24h,
                         percent_change_7d: data[i].percent_change_7d,
                         last_updated: data[i].last_updated,
+                        updatedAt:time
                     });
                     coin.save(err=>{
                         if (err) console.log(err);
-                        saved++;
+                        updated++;
                     });
+                }else{
+                    console.log(coin[0],data[i]);
                 }
             }
         }
@@ -89,6 +95,7 @@ router.get('/coinmarketcap', async (req,res,next) => {
         
         res.status(200).send({
             saved:`Saved: ${saved} coins`,
+            updated:`Updated ${updated} coin`,
             responseLength:`Response contained ${i} items`,
             lastItem:`Last item in response: ${data[i-1].name}`,
             firstItem:`First item in response: ${data[0].name}`
