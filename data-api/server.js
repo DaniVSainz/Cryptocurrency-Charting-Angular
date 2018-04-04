@@ -6,8 +6,10 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const config = require('./config/database');
 const logger = require('morgan');
-const cron = require('cron');
 
+//Cron jobs
+const cron = require('cron');
+let scrapeJob = require('./jobs/scrape')(cron);
 //Our routes
 const users = require('./routes/users');
 const confirmation = require('./routes/confirmation');

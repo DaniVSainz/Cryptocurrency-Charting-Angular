@@ -11,11 +11,11 @@ module.exports = function (cron) {
   }
  
   let helloJob = new cron.CronJob({
-    cronTime : '*/2 * * * * *',  // The time pattern when you want the job to start
+    cronTime : '1 * * * * *',  // The time pattern when you want the job to start
     onTick : printNumbers, // Task to run
     onComplete : resetNumber, // When job is completed and It stops.
     start : true, // immediately starts the job.
-    timeZone : config.timeZone // The timezone
+    // The timezone
   });
  
   return helloJob;
