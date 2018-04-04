@@ -5,7 +5,8 @@ const cors = require('cors');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const config = require('./config/database');
-var logger = require('morgan');
+const logger = require('morgan');
+const cron = require('cron');
 
 //Our routes
 const users = require('./routes/users');
