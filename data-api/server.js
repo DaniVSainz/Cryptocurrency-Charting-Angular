@@ -7,9 +7,6 @@ const mongoose = require('mongoose');
 const config = require('./config/database');
 const logger = require('morgan');
 
-//Cron jobs
-const cron = require('cron');
-let scrapeJob = require('./jobs/scrape')(cron);
 //Our routes
 const users = require('./routes/users');
 const confirmation = require('./routes/confirmation');

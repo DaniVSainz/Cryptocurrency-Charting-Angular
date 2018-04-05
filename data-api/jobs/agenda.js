@@ -16,6 +16,8 @@ jobTypes.forEach(function(type) {
 
 if(jobTypes.length) {
   agenda.on('ready', function() {
+    agenda.every('10 minutes', 'scrapeCoinMarketCap');
+
     agenda.start();
   });
 }
