@@ -12,6 +12,21 @@ const users = require('./routes/users');
 const confirmation = require('./routes/confirmation');
 const scrape = require('./routes/scrape')
 
+
+//
+const { fork } = require('child_process');
+//cronjobs
+const CronJob = require('cron').CronJob;
+const job = new CronJob('*/15 * * * * *', function() {
+  const compute = fork('./jobs/node-cron.js');
+  console.log('Running job');
+  compute.send('start');
+  compute.on('message', result => {
+    console.log(result)
+  });
+}, null, true, 'America/Los_Angeles');
+
+
 //For .env variables
 require('dotenv').config()
 
@@ -37,6 +52,8 @@ mongoose.connection.on('connected', () => {
 mongoose.connection.on('error', (err) => {
   console.log('Database error '+err);
 });
+
+job.start();
 
 const app = express();
 
