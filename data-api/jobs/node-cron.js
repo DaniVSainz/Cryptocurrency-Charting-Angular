@@ -4,20 +4,11 @@ const Exchange = require("../models/exchange");
 const fs = require("fs");
 const mongoose = require('mongoose');
 
+
+require('dotenv').config()
+
 mongoose.Promise = require('bluebird');
-// // Use q. Note that you **must** use `require('q').Promise`.
-// mongoose.Promise = require('q').Promise;
-
-//Read Mongoose.connect below
-// // Connect To Database 
-// mongoose.connect(config.database);
-
-//Or USE this instead to connect to db if you rather use .env variables
-//Works easier with deploys and git not having to change stuff and just using .env vars
-mongoose.connect('mongodb://localhost:27017/cryptoNalysisApi');
-
-
-// On Connection
+mongoose.connect(process.env.mongoUrl);
 
 
 process.on('message', async(msg) => {
@@ -32,6 +23,7 @@ process.on('message', async(msg) => {
 const scrapeCoinMarketCap = async() => {
     console.log('Begin coinmarket cap');
     let coinMarketCap = await Exchange.coinMarketCap();
+
     const url = "https://api.coinmarketcap.com/v1/ticker/?limit=0";
     const response = await axios.get(url);
     const data = response.data;

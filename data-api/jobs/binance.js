@@ -21,11 +21,17 @@ mongoose.connect('mongodb://localhost:27017/cryptoNalysisApi');
 
 
 process.on('message', async(msg) => {
-    await mongoose.connection.on('connected', () => {
-        console.log('Connected to Database '+ process.env.mongoUrl);
-      });
-    const sum = await scrapeBinance();
-    process.send(sum);
+    try{
+        await mongoose.connection.on('connected', () => {
+            console.log('Connected to Database '+ process.env.mongoUrl);
+          });
+        const sum = await scrapeBinance();
+        process.send(sum);
+    }catch(err){
+        console.log(err);
+        next(err);
+    }
+
 });
 
 
