@@ -1,4 +1,4 @@
-require('dotenv').config()
+require("dotenv").config();
 const axios = require("axios");
 const CryptoCurrency = require("../models/cryptoCurrency");
 const Exchange = require("../models/exchange");
@@ -15,14 +15,19 @@ const saveToDb = async () => {
       console.log("Connected to Database " + process.env.mongoUrl);
     });
 
-    var parser = parse({delimiter: ','}, function(err, data){
-        console.log(data[0]);
-      });
-      
-      fs.createReadStream(__dirname+'/my-csv.csv').pipe(parser);
+    var parser = await parse({ delimiter: "," }, function(err, data) {
+      console.log(data[0]);
+    });
+
+    await fs.createReadStream(__dirname + "/my-csv.csv").pipe(parser);
+
   } catch (error) {
-      console.log(error);
+    console.log(error);
   }
 };
 
 saveToDb();
+
+// mongoose.connection.close(res => {
+//     console.log("Connection Closed");
+// });
