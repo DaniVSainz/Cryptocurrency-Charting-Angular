@@ -32,14 +32,14 @@ process.on('message', async(msg) => {
 const scrapeCoinMarketCap = async() => {
     console.log('Begin coinmarket cap');
     let coinMarketCap = await Exchange.coinMarketCap();
-    // const url = "https://api.coinmarketcap.com/v1/ticker/?limit=0";
-    // const response = await axios.get(url);
-    // const data = response.data;
-    console.log(coinMarketCap);
+    const url = "https://api.coinmarketcap.com/v1/ticker/?limit=0";
+    const response = await axios.get(url);
+    const data = response.data;
+    // console.log(coinMarketCap);
 
-    const response = fs.readFileSync('../testResponses/coinMarketCapTicker.json')
-    let data = JSON.parse(response);
-    data = data;
+    // const response = fs.readFileSync('../testResponses/coinMarketCapTicker.json')
+    // let data = JSON.parse(response);
+    // data = data;
 
     const time = new Date();
     let counter = 0;

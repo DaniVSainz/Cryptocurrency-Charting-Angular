@@ -18,4 +18,15 @@ ExchangeSchema.statics.coinMarketCap = async function(){
     return coinMarketCap
 }
 
+ExchangeSchema.statics.binance = async function(){
+    let binance = await Exchange.findOne({name: 'Binance'});
+    if (binance == undefined){
+        binance = await Exchange.create({name: 'Binance'}, (err,coinMarketCap)=>{
+            if(err){throw Error(err)}
+            binance;
+        });
+    }
+    return binance
+}
+
 const Exchange = module.exports = mongoose.model('Exchange', ExchangeSchema);
