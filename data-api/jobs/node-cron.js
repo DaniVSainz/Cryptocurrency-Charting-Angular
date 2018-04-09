@@ -97,12 +97,13 @@ const scrapeCoinMarketCap = async() => {
                     if (err) console.log(err);
                     updated++;
                 });
-            }else{
-                console.log(coin[0],data[i]);
             }
         }
     }
-    console.log('Before return')
+    await mongoose.connection.close((res)=>{
+        console.log('Connection Closed')
+    })
+
     return {
       saved: `Saved: ${saved} coins`,
       updated: `Updated ${updated} coin`,

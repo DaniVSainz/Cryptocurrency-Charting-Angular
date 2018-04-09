@@ -17,7 +17,7 @@ const scrape = require('./routes/scrape')
 const { fork } = require('child_process');
 //cronjobs
 const CronJob = require('cron').CronJob;
-const job = new CronJob('*/15 * * * * *', function() {
+const job = new CronJob('*/5 * * * *', function() {
   const compute = fork('./jobs/node-cron.js');
   console.log('Running job');
   compute.send('start');
