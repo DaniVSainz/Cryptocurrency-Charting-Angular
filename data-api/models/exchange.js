@@ -26,7 +26,7 @@ ExchangeSchema.statics.coinMarketCap = async function(){
 // }
 
 ExchangeSchema.statics.binance = async function(){
-    let binance = await Exchange.findOne({name: 'Binance'});
+    let binance = await Exchange.findOne({name: 'Binance'}).populate('markets').exec();
     if (binance == undefined){
         binance = await Exchange.create({name:'Binance'});
         Exchange.create({},)

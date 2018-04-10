@@ -53,32 +53,50 @@ const scrapeBinanceExchangeInfo = async () => {
 
     let exchange = await Exchange.binance();
 
-    let pairs = data.symbols;
-    let pair;
+    let responsePairs = data.symbols;
+    let responsePair;
     let currentMarket;
-    let referenceCoin;
+    let referenceCoin; // quote asset reference cryptocurrency
+    let cryptoCurrency;
+    let pairInDb;
 
-    for(let i=0;i<pairs.length;i++){
+    for(let i=0;i<responsePairs.length;i++){
       //Binance api has fake data in prod... skip this symbol
+      responsePair = responsePairs[i];
+      if(responsePair.symbol != "123456"){
 
-      if(pairs[i].symbol != "123456"){
-        pair = pairs[i];
-        currentMarket = await Market.find({symbol:pair.quoteAsset, exchange_id:exchange._id});
-        console.log(currentMarket);
+        currentMarket = await Market.find({symbol:responsePair.quoteAsset, exchange_id:exchange._id});
 
         //If exchange dosent have a market create it.
         if(currentMarket.length==0){
-          referenceCoin = await CryptoCurrency.findOne({symbol:pair.quoteAsset});
-
+          referenceCoin = await CryptoCurrency.findOne({symbol:responsePair.quoteAsset});
+          //create new market since we did not have a market for it
           currentMarket = new Market({
             name:referenceCoin.name,
             symbol:referenceCoin.symbol,
             exchange_id:exchange._id
           });
-
+          //save the market
           currentMarket = await currentMarket.save();
-          
-          
+          //push ref onto market incase we ever want to populate
+          exchange.markets.push(currentMarket._id);
+          exchange = await exchange.save();
+
+
+        //We have a market to add cryptocurrencies to.
+        }else if(currentMarket.length == 1){
+          //set current market for easier referencing.
+          currentMarket=currentMarket[0];
+
+          //Now we would check if a pair exists for that cryptoCurrency.
+          pairInDb = await Pairs.findOne({symbol:responsePair.baseAsset, market_id:currentMarket._id});
+          if(pairInDb==undefined){
+          }
+
+
+        //This would mean we found multiple markets which should not occur.
+        }else{
+          throw Error('Found duplicates when it should have not occured, create validation');
         }
       }
     }
