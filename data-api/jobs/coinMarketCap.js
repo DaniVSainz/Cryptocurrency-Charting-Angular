@@ -15,6 +15,9 @@ process.on('message', async(msg) => {
     await mongoose.connection.on('connected', () => {
         console.log('Connected to Database '+ process.env.mongoUrl);
       });
+      mongoose.connection.on('error', (err) => {
+        console.log('Database error '+err);
+      });
     const sum = await scrapeCoinMarketCap();
     process.send(sum);
 });

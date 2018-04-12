@@ -12,12 +12,13 @@ router.get('/getpairdata/:symbol', async (req,res,next) => {
     try{
         let pairParam = req.params.symbol.toUpperCase();
         let pair = await Pair.find({symbol:pairParam});
+        let cryptoCurrency = await CryptoCurrency.findOne({symbol:pairParam});
         let days;
         if (pair.length >= 1){
             days = await Day.find({pair_id:pair[0]._id});
-            return res.status(200).send(days);
+            return res.status(200).send([{pair},{days},{cryptoCurrency}]);
         }else{
-            return res.status(200).send({msg:'Sorry we dont have any historical data for that cryptocurrency'});
+            return res.status(500).send({msg:'Sorry we dont have any historical data for that cryptocurrency'});
         }        
     }catch(err){
         console.log(err);
