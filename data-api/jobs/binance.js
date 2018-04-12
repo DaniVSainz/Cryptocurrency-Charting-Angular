@@ -58,8 +58,8 @@ const scrapeBinanceExchangeInfo = async () => {
     let responsePairs = data.symbols; // all the coins in the response from exchange
     let responsePair; // current response pair
     let currentMarket; //current market pair data will be saved to
-    let referenceCoin; // quote asset reference cryptocurrency
-    let cryptoCurrency;
+    let quoteAsset; // quote asset reference cryptocurrency
+    let baseAsset; //base asset reference cryptocurrency
     let pairInDb; // check if the pair exists or create one. later this will be used to get _Id to save days to
 
     for(let i=0;i<responsePairs.length;i++){
@@ -71,11 +71,11 @@ const scrapeBinanceExchangeInfo = async () => {
 
         //If exchange dosent have a market create it.
         if(currentMarket.length==0){
-          referenceCoin = await CryptoCurrency.findOne({symbol:responsePair.quoteAsset});
+          quoteAsset = await CryptoCurrency.findOne({symbol:responsePair.quoteAsset});
           //create new market since we did not have a market for it
           currentMarket = new Market({
-            name:referenceCoin.name,
-            symbol:referenceCoin.symbol,
+            name:quoteAsset.name,
+            symbol:quoteAsset.symbol,
             exchange_id:exchange._id
           });
           //save the market
@@ -85,7 +85,7 @@ const scrapeBinanceExchangeInfo = async () => {
           exchange = await exchange.save();
 
 
-        //We have a market to add cryptocurrencies to.
+        //We have a market to add pairs to.
         }else if(currentMarket.length == 1){
           //set current market for easier referencing.
           currentMarket=currentMarket[0];
@@ -94,8 +94,13 @@ const scrapeBinanceExchangeInfo = async () => {
           pairInDb = await Pair.findOne({symbol:responsePair.baseAsset, market_id:currentMarket._id});
           if(pairInDb==undefined){
             pairInDb = new Pair({
-              
-            })
+              symbol: responsePair.baseAsset,
+              quoteAsset: responsePair.quoteAsset,
+              market_id: currentMarket._id,
+              pair: responsePair.symbol
+            });
+            pairInDb = await pairInDb.save();
+            console.log(`Saved ${pairInDb.pair}`);
           }
 
 
