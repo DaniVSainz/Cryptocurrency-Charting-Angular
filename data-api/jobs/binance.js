@@ -107,8 +107,6 @@ const scrapeBinanceExchangeInfo = async () => {
             pairInDb = await pairInDb.save();
             // console.log(`Saved ${pairInDb.pair}`);
           }
-
-
         //This would mean we found multiple markets which should not occur.
         }else{
           throw Error('Found duplicates when it should have not occured, create validation');
@@ -120,6 +118,10 @@ const scrapeBinanceExchangeInfo = async () => {
     console.log(err);
   }
 };
+
+const scrapeDays = async () =>{
+
+}
 
 
 run().then((exchange)=>{
