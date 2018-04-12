@@ -1,8 +1,10 @@
-require('dotenv').config()
 const axios = require("axios");
 const CryptoCurrency = require("../models/cryptoCurrency");
 const Exchange = require("../models/exchange");
 const Market = require('../models/market');
+const Pair = require('../models/pair');
+require('dotenv').config()
+
 
 const fs = require("fs");
 const mongoose = require("mongoose");
@@ -53,12 +55,12 @@ const scrapeBinanceExchangeInfo = async () => {
 
     let exchange = await Exchange.binance();
 
-    let responsePairs = data.symbols;
-    let responsePair;
-    let currentMarket;
+    let responsePairs = data.symbols; // all the coins in the response from exchange
+    let responsePair; // current response pair
+    let currentMarket; //current market pair data will be saved to
     let referenceCoin; // quote asset reference cryptocurrency
     let cryptoCurrency;
-    let pairInDb;
+    let pairInDb; // check if the pair exists or create one. later this will be used to get _Id to save days to
 
     for(let i=0;i<responsePairs.length;i++){
       //Binance api has fake data in prod... skip this symbol
@@ -89,8 +91,11 @@ const scrapeBinanceExchangeInfo = async () => {
           currentMarket=currentMarket[0];
 
           //Now we would check if a pair exists for that cryptoCurrency.
-          pairInDb = await Pairs.findOne({symbol:responsePair.baseAsset, market_id:currentMarket._id});
+          pairInDb = await Pair.findOne({symbol:responsePair.baseAsset, market_id:currentMarket._id});
           if(pairInDb==undefined){
+            pairInDb = new Pair({
+              
+            })
           }
 
 

@@ -18,7 +18,7 @@ const { fork } = require('child_process');
 //cronjobs
 const CronJob = require('cron').CronJob;
 const job = new CronJob('*/5 * * * *', function() {
-  const compute = fork('./jobs/node-cron.js');
+  const compute = fork('./jobs/coinMarketCap.js');
   console.log('Running job');
   compute.send('start');
   compute.on('message', result => {
@@ -86,7 +86,7 @@ require('./config/passport')(passport);
 
 app.use('/users', users);
 app.use('/confirmation', confirmation);
-app.use('/scrape', scrape);
+app.use('/coinmarketcap', scrape);
 
 
 

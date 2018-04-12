@@ -38,6 +38,7 @@ const scrapeCoinMarketCap = async() => {
     let coin;
     let saved = 0;
     let updated = 0;
+    let coinsInDb;
     let i = 0;
     for(i;i<data.length;i++){
         data[i].rank = parseInt(data[i].rank);
@@ -92,15 +93,24 @@ const scrapeCoinMarketCap = async() => {
             }
         }
     }
+
+    
+    coinsInDb = await CryptoCurrency.find();
+    coinsInDb = coinsInDb.length;
+    
+
     await mongoose.connection.close((res)=>{
         console.log('Connection Closed')
     })
+
+
 
     return {
       saved: `Saved: ${saved} coins`,
       updated: `Updated ${updated} coin`,
       responseLength: `Response contained ${i - 1} items`,
       lastItem: `Last item in response: ${data[i - 1].name}`,
-      firstItem: `First item in response: ${data[0].name}`
+      firstItem: `First item in response: ${data[0].name}`,
+      coins: `There are ${coinsInDb} in our DB`
     };
 };
