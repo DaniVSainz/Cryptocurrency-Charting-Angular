@@ -93,12 +93,17 @@ const scrapeBinanceExchangeInfo = async () => {
           //Now we would check if a pair exists for that cryptoCurrency.
           pairInDb = await Pair.findOne({symbol:responsePair.baseAsset, market_id:currentMarket._id});
           if(pairInDb==undefined){
+            //Check if we have the responses pair cryptocurrency's(baseAsset) in our database to save a name to it since its not returned from exchange api
+            baseAsset = CryptoCurrency.findOne({symbol:responsePair.baseAsset});
             pairInDb = new Pair({
               symbol: responsePair.baseAsset,
-              quoteAsset: responsePair.quoteAsset,
+              quote_asset: responsePair.quoteAsset,
               market_id: currentMarket._id,
               pair: responsePair.symbol
             });
+
+            if(baseAsset != null) pairInDb.name = baseAsset.name;
+            
             pairInDb = await pairInDb.save();
             console.log(`Saved ${pairInDb.pair}`);
           }
