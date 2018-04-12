@@ -36,7 +36,7 @@ const run = async () => {
     });
 
     //wait for result
-    let result = await scrapeBinanceExchangeInfo();
+    // let result = await scrapeBinanceExchangeInfo();
 
     return result;
 
@@ -46,7 +46,7 @@ const run = async () => {
 };
 
 
-
+//This function saves all the exchanges pair listings to our db To later run a script that hits their historical data from this list.
 const scrapeBinanceExchangeInfo = async () => {
   try {
     const url = "https://api.binance.com/api/v1/exchangeInfo";
@@ -119,8 +119,26 @@ const scrapeBinanceExchangeInfo = async () => {
   }
 };
 
-const scrapeDays = async () =>{
 
+//This function will get a list of all Binance's pair and scrape data from the api for each one.
+const scrapeDays = async () =>{
+  let exchange = await Exhcnage.findOne({name:'Binance'});
+  let markets = await Market.find({exchange_id:exchange._id});
+  let pairs;
+  let pair;
+
+  let url;
+  let response;
+  let data = response.data;
+
+  for(let i=0;i < markets.length;i++){
+    pairs = await Pair.find({market_id:market._id});
+    for(let i=0;i< pairs.length;i++){
+      pair = pairs[i];
+      url = `https://api.binance.com/api/v1/klines?symbol=${pair.pair}&interval=1d`
+      response = await axios.get(url);
+    }
+  }
 }
 
 
