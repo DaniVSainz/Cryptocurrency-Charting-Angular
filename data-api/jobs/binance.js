@@ -105,7 +105,7 @@ const scrapeBinanceExchangeInfo = async () => {
             if(baseAsset != null) pairInDb.name = baseAsset.name;
             
             pairInDb = await pairInDb.save();
-            console.log(`Saved ${pairInDb.pair}`);
+            // console.log(`Saved ${pairInDb.pair}`);
           }
 
 
