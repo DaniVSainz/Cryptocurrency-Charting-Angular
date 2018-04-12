@@ -2,13 +2,26 @@ const express = require('express');
 const router = express.Router();
 const CryptoCurrency = require('../models/cryptoCurrency');
 const Exchange = require('../models/exchange');
+const Market = require('../models/market');
+const Pair = require('../models/pair');
+const Day = require('../models/day');
 
 
-router.get('/coinmarketcap/getpairdata/:symbol', async (req,res,next) => {
+
+router.get('/getpairdata/:symbol', async (req,res,next) => {
     try{
-
+        let pairParam = req.params.symbol.toUpperCase();
+        let pair = await Pair.find({symbol:pairParam});
+        let days;
+        if (pair.length >= 1){
+            days = await Day.find({pair_id:pair[0]._id});
+            return res.status(200).send(days);
+        }else{
+            return res.status(200).send({msg:'Sorry we dont have any historical data for that cryptocurrency'});
+        }        
     }catch(err){
-
+        console.log(err);
+        next(err); 
     }
 });
 
