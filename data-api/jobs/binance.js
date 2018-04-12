@@ -3,6 +3,7 @@ const CryptoCurrency = require("../models/cryptoCurrency");
 const Exchange = require("../models/exchange");
 const Market = require('../models/market');
 const Pair = require('../models/pair');
+const Day = require('../models/day');
 require('dotenv').config()
 
 
@@ -134,9 +135,9 @@ const scrapeDays = async () =>{
   let data;
   let day;
   let date;
-  let skipCount=0;
+  let skipCount;
   let saved = 0;
-  let updated = 0;
+
 
   //go through each of binances markets ie BTC/ETH/USDT/BNB then get all of the pairs against that market and get the current data from the api.
   for(let i=0;i < markets.length;i++){
@@ -148,11 +149,11 @@ const scrapeDays = async () =>{
       url = `https://api.binance.com/api/v1/klines?symbol=${pair.pair}&interval=1d`
       response = await axios.get(url);
       data = response.data;
-
+      skipCount = 0;
       for(let i = data.length -1 ;i >= 0; i--){
         responseDay=data[i]
         date = new Date(responseDay[0]);
-        day = await Day.findOne({date:date});
+        day = await Day.findOne({date:date, pair_id:pair._id});
         //If the day dosent exist create it
         if(day==undefined){
           day = new Day({
@@ -164,26 +165,42 @@ const scrapeDays = async () =>{
             closingPrice:responseDay[4],
             totalVolume:responseDay[5],
             closeEpoch:responseDay[6],
-            totalVolumeQuoteAsset:totalVolumeQuoteAsset[7],
-            totalTrades:totalTrades[8],
+            totalVolumeQuoteAsset:responseDay[7],
+            totalTrades:responseDay[8],
             pair_id: pair._id
           })
-
           //save the day
           day = await day.save();
+          console.log(`Day saved ${day.date}`);
           saved ++;
+        }else if(day && skipCount < 3 ){
+          day.openEpoch = responseDay[0];
+          day.openingPrice = responseDay[1];
+          day.highestPrice = responseDay[2];
+          day.lowestPrice = responseDay[3];
+          day.closingPrice = responseDay[4];
+          day.totalVolume = responseDay[5];
+          day.closeEpoch = responseDay[6];
+          day.totalVolumeQuoteAsset = responseDay[7];
+          day.totalTrades = responseDay[8];
+          day = await day.save();
+          skipCount ++;
+          console.log(`Pair: ${pair.symbol} Day updated ${day.date} Skip count = ${skipCount}`)
+        }else{
+          break;
         }
       }
     }
   }
+  return saved;
 }
 
 
-run().then((exchange)=>{
-  console.log(exchange)
+run().then((result)=>{
+  console.log(result);
   mongoose.connection.close((res)=>{
-    console.log('Connection Closed')
-  })
+    console.log('Connection Closed');
+  });
 })
 
 
