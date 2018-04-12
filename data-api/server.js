@@ -10,7 +10,8 @@ const logger = require('morgan');
 //Our routes
 const users = require('./routes/users');
 const confirmation = require('./routes/confirmation');
-const scrape = require('./routes/scrape')
+const coinmarketcap = require('./routes/coinmarketcap');
+const binance = require('./routes/binance');
 
 
 //
@@ -86,7 +87,8 @@ require('./config/passport')(passport);
 
 app.use('/users', users);
 app.use('/confirmation', confirmation);
-app.use('/coinmarketcap', scrape);
+app.use('/coinmarketcap', coinmarketcap);
+app.use('/binance', binance);
 
 
 
