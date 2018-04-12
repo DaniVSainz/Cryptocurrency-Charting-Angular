@@ -48,6 +48,7 @@ const saveToDb = async () => {
               pair_id: pair._id
             });
             day = await day.save();
+            console.log(`Day saved ${dataDay[0]}`)
             saved++;
           }
         }
