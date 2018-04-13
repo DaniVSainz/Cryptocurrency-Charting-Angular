@@ -17,16 +17,16 @@ router.get('/getpairdata/:symbol', async (req,res,next) => {
         let days;
         console.log(pairs.length);
         if (pairs.length >= 0){
-            for (let i =0;pairs.length;i++){
+            for (let i =0;i<pairs.length;i++){
                 console.log(pairs[i].quote_asset);
                 if(pairs[i].quote_asset=='USDT'){
                     pair = pairs[i];
                     break;
                 }else if(pairs[i].quote_asset=='BTC'){
                     pair = pairs[i];
-                }else if(pairs[i].quote_asset=='ETH'){
+                }else if(pairs[i].quote_asset=='ETH' && pair.quote_asset=='BNB'){
                     pair = pairs[i];
-                }else{
+                }else if (pairs[i].quote_asset=='ETH' && pair == undefined){
                     pair = pairs[i];
                 }
             }
