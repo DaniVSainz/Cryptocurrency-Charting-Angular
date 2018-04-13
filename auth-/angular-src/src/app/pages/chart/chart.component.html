@@ -7,7 +7,7 @@
             <span >Sorry we have no data for this coin</span>
           </div>
           <div class="col-sm text-left list-blocks" *ngIf="noData == false">
-            <span ><img src="assets/images/coins/{{cryptoCurrency.name.split(' ').join('_')}}.png" class="icon-img" /> {{this.pair.name}}</span>
+            <span ><img src="assets/images/coins/{{cryptoCurrency.name.split(' ').join('_')}}.png" class="icon-img" /> {{this.cryptoCurrency.name}}</span>
             <span >Current Price: ${{cryptoCurrency.price_usd}}</span>
             <span >Pairing: <span class="text-success">{{this.pair.symbol}}</span>/{{this.pair.quote_asset}}</span>
           </div>
@@ -18,7 +18,7 @@
           </div>
           <div class="col-sm text-left list-blocks" *ngIf="cryptoCurrency">
               <span >24H Volume: ${{cryptoCurrency['24h_volume_usd'] | number:minFractionDigits}}</span>
-              <span >Info Updated {{cryptoCurrency.updated_at | date:'shortTime'}} EST</span>
+              <span >Info Updated {{cryptoCurrency.updatedAt | date:'shortTime'}} EST</span>
           </div>
         
         <div class="col-sm text-right">
