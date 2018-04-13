@@ -153,6 +153,7 @@ const scrapeDays = async () =>{
       for(let i = data.length -1 ;i >= 0; i--){
         responseDay=data[i]
         date = new Date(responseDay[0]);
+        date = date.toISOString().slice(0,10);
         day = await Day.findOne({date:date, pair_id:pair._id});
         //If the day dosent exist create it
         if(day==undefined){

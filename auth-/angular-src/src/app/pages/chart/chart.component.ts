@@ -50,7 +50,7 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnInit {
           this.priceData.push(element.openingPrice.replace(/,/g,""));
         });
         console.log(this.cryptoCurrency)
-        // Calls our functions that constructs are chart, doing it this way to ensure our data is finished processing.
+        // Calls our functions that constructs our chart, doing it this way to ensure our data is finished processing.
         this.setChart(this.dayData,this.priceData);
         
       }, err =>{
