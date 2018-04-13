@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const DaySchema =  mongoose.Schema({
-    date:{type:Date, required:true},
+    date:{type:String, required:true},
     openEpoch:{type:Number},
     openTime:{type:Date},
     openingPrice:{type:String},

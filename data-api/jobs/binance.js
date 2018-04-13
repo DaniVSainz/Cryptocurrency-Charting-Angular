@@ -174,7 +174,7 @@ const scrapeDays = async () =>{
           day = await day.save();
           console.log(`Day saved ${day.date}`);
           saved ++;
-        }else if(day && skipCount < 3 ){
+        }else if(day && skipCount < 2 ){
           day.openEpoch = responseDay[0];
           day.openingPrice = responseDay[1];
           day.highestPrice = responseDay[2];
