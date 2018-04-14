@@ -21,7 +21,7 @@ const saveToDb = async () => {
     let saved = 0;
     // let exchange = await Exchange.findOne({ name: "Binance" });
     let exchange = await Exchange.binance();
-    console.log(exchange);
+    // console.log(exchange);
     let market = await Market.findOne({
       exchange_id: exchange._id,
       symbol: "USDT"
