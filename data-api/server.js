@@ -24,17 +24,19 @@ const coinMarketCapJob = new CronJob('*/5 * * * *', function() {
   console.log('Running CoinmarketCap job');
   compute.send('start');
   compute.on('message', result => {
-    console.log(result)
+    console.log(result);
+    compute.kill('SIGINT');
   });
 }, null, true, 'America/Los_Angeles');
 
 //Should run once an hour
-const binanceScrapeKlinesJob = new CronJob('0 0 * * * *', function() {
+const binanceScrapeKlinesJob = new CronJob('0 */10 * * * *', function() {
   const compute2 = fork('./jobs/binance/scrapeKlines.js');
   console.log('Running Binance Klines job');
   compute2.send('start');
   compute2.on('message', result => {
-    console.log(result)
+    console.log(result);
+    compute2.kill('SIGINT');
   });
 }, null, true, 'America/Los_Angeles');
 
@@ -44,6 +46,7 @@ const binanceScrapeExchangeInfo = new CronJob('0 0 0 * * *', function() {
   compute3.send('start');
   compute3.on('message', result => {
     console.log(result)
+    compute3.kill('SIGINT');
   });
 }, null, true, 'America/Los_Angeles');
 
