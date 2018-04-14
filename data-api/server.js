@@ -29,8 +29,8 @@ const coinMarketCapJob = new CronJob('*/5 * * * *', function() {
   });
 }, null, true, 'America/Los_Angeles');
 
-//Should run once an hour
-const binanceScrapeKlinesJob = new CronJob('0 */10 * * * *', function() {
+//Should run every 15 minutes
+const binanceScrapeKlinesJob = new CronJob('0 */15 * * * *', function() {
   const compute2 = fork('./jobs/binance/scrapeKlines.js');
   console.log('Running Binance Klines job');
   compute2.send('start');
