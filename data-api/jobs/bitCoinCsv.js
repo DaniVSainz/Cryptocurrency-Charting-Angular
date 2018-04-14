@@ -10,8 +10,8 @@ const mongoose = require("mongoose");
 const parse = require("csv-parse");
 
 mongoose.Promise = require("bluebird");
-// mongoose.connect(process.env.mongoUrl);
-mongoose.connect("mongodb://localhost:27017/cryptoNalysisApi");
+mongoose.connect(process.env.mongoUrl);
+// mongoose.connect("mongodb://localhost:27017/cryptoNalysisApi");
 
 const saveToDb = async () => {
   try {
