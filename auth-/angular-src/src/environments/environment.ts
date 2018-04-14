@@ -10,6 +10,8 @@
 
 export const environment = {
   production: false,
-  urlUsers:'http://localhost:3000',
-  url: "http://localhost:3001"
+  // urlUsers:'http://localhost:3000',
+  // url: "http://localhost:3001"
+  urlUsers: "159.89.48.60:3000",
+  url:"159.89.48.60:3001"
 };
