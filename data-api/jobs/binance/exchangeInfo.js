@@ -21,6 +21,9 @@ process.on('message', async(msg) => {
             console.log('Connected to Database '+ process.env.mongoUrl);
           });
         const sum = await scrapeBinanceExchangeInfo();
+        await mongoose.connection.close((res)=>{
+          console.log('Connection Closed, From exchangeInfo Worker');
+        });
         process.send(sum);
     }catch(err){
         console.log(err);

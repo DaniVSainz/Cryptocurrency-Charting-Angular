@@ -18,6 +18,7 @@ const binance = require('./routes/binance');
 const { fork } = require('child_process');
 //cronjobs
 const CronJob = require('cron').CronJob;
+
 const coinMarketCapJob = new CronJob('*/5 * * * *', function() {
   const compute = fork('./jobs/coinMarketCap.js');
   console.log('Running CoinmarketCap job');
@@ -37,7 +38,7 @@ const binanceScrapeKlinesJob = new CronJob('0 0 * * * *', function() {
   });
 }, null, true, 'America/Los_Angeles');
 
-const binanceScrapeExchangeInfo = new CronJob('0 0 * * * *', function() {
+const binanceScrapeExchangeInfo = new CronJob('0 0 0 * * *', function() {
   const compute3 = fork('./jobs/binance/exchangeInfo.js');
   console.log('Running Binance Exchange Info job');
   compute3.send('start');
