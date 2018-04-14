@@ -10,7 +10,7 @@ const ExchangeSchema =  mongoose.Schema({
 ExchangeSchema.statics.coinMarketCap = async function(){
     let coinMarketCap = await Exchange.findOne({name: 'CoinMarketCap'});
     if (coinMarketCap == undefined){
-        coinMarketCap = new Exhcnage({name:'Binance'});
+        coinMarketCap = new Exchange({name:'CoinMarketCap'});
         coinMarketCap = await coinMarketCap.save();
     }
     return coinMarketCap
@@ -29,7 +29,7 @@ ExchangeSchema.statics.binance = async function(){
     let binance = await Exchange.findOne({name: 'Binance'}).populate('markets').exec();
     if (binance == undefined){
         binance = await Exchange.create({name:'Binance'});
-        Exchange.create({},)
+        binance;
     }
     return binance
 }
