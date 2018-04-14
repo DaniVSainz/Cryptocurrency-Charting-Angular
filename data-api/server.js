@@ -18,15 +18,33 @@ const binance = require('./routes/binance');
 const { fork } = require('child_process');
 //cronjobs
 const CronJob = require('cron').CronJob;
-const job = new CronJob('*/5 * * * *', function() {
+const coinMarketCapJob = new CronJob('*/5 * * * *', function() {
   const compute = fork('./jobs/coinMarketCap.js');
-  console.log('Running job');
+  console.log('Running CoinmarketCap job');
   compute.send('start');
   compute.on('message', result => {
     console.log(result)
   });
 }, null, true, 'America/Los_Angeles');
 
+//Should run once an hour
+const binanceScrapeKlinesJob = new CronJob('0 0 * * * *', function() {
+  const compute2 = fork('./jobs/binance/scrapeKlines.js');
+  console.log('Running Binance Klines job');
+  compute2.send('start');
+  compute2.on('message', result => {
+    console.log(result)
+  });
+}, null, true, 'America/Los_Angeles');
+
+const binanceScrapeExchangeInfo = new CronJob('0 0 * * * *', function() {
+  const compute3 = fork('./jobs/binance/exchangeInfo.js');
+  console.log('Running Binance Exchange Info job');
+  compute3.send('start');
+  compute3.on('message', result => {
+    console.log(result)
+  });
+}, null, true, 'America/Los_Angeles');
 
 //For .env variables
 require('dotenv').config()
@@ -53,8 +71,6 @@ mongoose.connection.on('connected', () => {
 mongoose.connection.on('error', (err) => {
   console.log('Database error '+err);
 });
-
-job.start();
 
 const app = express();
 

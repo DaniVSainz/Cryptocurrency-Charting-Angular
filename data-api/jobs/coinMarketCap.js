@@ -103,7 +103,7 @@ const scrapeCoinMarketCap = async() => {
     
 
     await mongoose.connection.close((res)=>{
-        console.log('Connection Closed')
+        console.log('Connection Closed, From CoinMarketCap worker');
     })
 
 
