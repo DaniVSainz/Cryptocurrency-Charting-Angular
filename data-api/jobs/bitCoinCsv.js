@@ -19,7 +19,8 @@ const saveToDb = async () => {
       console.log("Connected to Database " + process.env.mongoUrl);
     });
     let saved = 0;
-    let exchange = await Exchange.findOne({ name: "Binance" });
+    // let exchange = await Exchange.findOne({ name: "Binance" });
+    let exchange = await Exchange.binance();
     console.log(exchange);
     let market = await Market.findOne({
       exchange_id: exchange._id,
