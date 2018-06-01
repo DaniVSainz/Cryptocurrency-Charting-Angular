@@ -7,9 +7,7 @@ const fs = require('fs');
 
 router.get('/getall', async (req,res,next)=>{
     try{
-        let data = await CryptoCurrency.find({},(err)=>{
-            if (err) console.log(err);
-        });
+        let data = await CryptoCurrency.find({}).sort('rank').exec();
         if(data){
             res.status(200).json(data);
         }
