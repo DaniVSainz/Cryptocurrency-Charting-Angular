@@ -42,6 +42,30 @@ const Day = require('../models/day');
 //         next(err); 
 //     }
 // });
+router.get('/getpairdata/:symbol/:quote_asset', async (req,res,next) => {
+  try{
+      //Route assets
+      let pairParam = req.params.symbol.toUpperCase();
+      let pairQuoteAsset = req.params.quote_asset.toUpperCase();
+      console.log(`${pairParam}${pairQuoteAsset}`);
+
+      let pairs = await Pair.find({symbol:pairParam});
+
+      let pair = await Pair.findOne({symbol:pairParam, quote_asset: pairQuoteAsset });
+      console.log(pair);
+      let cryptoCurrency = await CryptoCurrency.findOne({symbol:pairParam});
+      let days = await Day.find({pair_id:pair._id}).sort('date').exec();
+        if(days){
+          console.log(days.length)
+          return res.status(200).send([{pair},{days},{cryptoCurrency}, {pairs}]);
+        } else{
+          return res.status(200).send({msg:'Sorry we dont have any historical data for that cryptocurrency'});
+      }        
+  }catch(err){
+      console.log(err);
+      next(err); 
+  }
+});
 
 router.get('/getpairdata/:symbol', async (req,res,next) => {
   try{
@@ -66,7 +90,7 @@ router.get('/getpairdata/:symbol', async (req,res,next) => {
               }
           }
           days = await Day.find({pair_id:pair._id}).sort('date').exec();
-          return res.status(200).send([{pair},{days},{cryptoCurrency}]);
+          return res.status(200).send([{pair},{days},{cryptoCurrency},{pairs}]);
       }else{
           return res.status(200).send({msg:'Sorry we dont have any historical data for that cryptocurrency'});
       }        
@@ -75,7 +99,6 @@ router.get('/getpairdata/:symbol', async (req,res,next) => {
       next(err); 
   }
 });
-
 
 module.exports = router;
 
